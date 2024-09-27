@@ -2,13 +2,14 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import Case from '../../public/images/casestudy.jpg'
 
 const caseStudies = [
   {
     title: 'Boosting Brand Engagement with QR Codes',
     client: 'TechCorp Inc.',
     description: 'Implemented a QR code campaign that increased customer engagement by 150% and drove a 30% increase in sales.',
-    image: '/placeholder.svg',
+    image: Case ,
     metrics: ['150% increase in engagement', '30% increase in sales', '50,000 QR code scans'],
     testimonial: 'PR-Connect transformed our marketing strategy. The QR code campaign they designed exceeded our expectations and significantly boosted our sales.',
     author: 'John Doe, CEO of TechCorp Inc.'
@@ -17,7 +18,7 @@ const caseStudies = [
     title: 'Revamping Online Presence for Local Business',
     client: 'Green Leaf Cafe',
     description: 'Redesigned website and implemented SEO strategies, resulting in a 200% increase in organic traffic and 50% boost in online orders.',
-    image: '/placeholder.svg',
+    image: Case,
     metrics: ['200% increase in organic traffic', '50% increase in online orders', '1st page Google ranking for key terms'],
     testimonial: 'The team at PR-Connect completely transformed our online presence. We\'ve seen a dramatic increase in customers finding us online.',
     author: 'Jane Smith, Owner of Green Leaf Cafe'

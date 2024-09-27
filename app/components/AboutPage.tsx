@@ -2,13 +2,15 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import CEO from '../../public/images/CEO.jpg'
 
 const teamMembers = [
-  { name: 'Jane Doe', role: 'CEO & Founder', image: '/placeholder.svg' },
+  { name: 'Priyansh Yadav', role: 'CEO & Founder', image: CEO },
   { name: 'John Smith', role: 'Marketing Director', image: '/placeholder.svg' },
   { name: 'Emily Brown', role: 'QR Specialist', image: '/placeholder.svg' },
   { name: 'Michael Johnson', role: 'Content Strategist', image: '/placeholder.svg' },
-]
+];
+
 
 export default function AboutUs() {
   return (

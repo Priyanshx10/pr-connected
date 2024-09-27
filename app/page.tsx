@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import Team from '../public/images/team.jpg'
 
 export default function Home() {
   return (
@@ -20,7 +21,7 @@ export default function Home() {
         <div className="container mx-auto px-6">
           <div className="flex flex-wrap items-center">
             <div className="w-full md:w-1/2 mb-8 md:mb-0">
-              <Image src="/placeholder.svg" alt="PR-Connect Team" width={500} height={300} className="rounded-lg shadow-lg" />
+              <Image src={Team} alt="PR-Connect Team" width={500} height={300} className="rounded-lg shadow-lg" />
             </div>
             <div className="w-full md:w-1/2 md:pl-12">
               <h2 className="text-3xl font-bold mb-4">Welcome to PR-Connect</h2>

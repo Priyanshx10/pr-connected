@@ -1,29 +1,28 @@
 'use client'
-
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 
 const blogPosts = [
   {
-    title: 'The Power of QR Codes in Modern Marketing',
-    excerpt: 'Discover how QR codes are revolutionizing marketing strategies and enhancing customer engagement.',
-    date: '2023-05-15',
-    author: 'Jane Doe',
-    category: 'Marketing Trends'
-  },
-  {
-    title: 'SEO Best Practices for 2023',
-    excerpt: 'Stay ahead of the curve with these essential SEO strategies to boost your online presence.',
-    date: '2023-05-10',
-    author: 'John Smith',
+    title: '12 SEO Best Practices to Improve Rankings in 2023',
+    excerpt: 'Learn essential strategies like mobile-first optimization and quality content creation to enhance your site’s visibility.',
+    date: '2023-09-10',
+    author: 'Wadood Amir',
     category: 'SEO'
   },
   {
-    title: 'Creating Compelling Content for Social Media',
-    excerpt: 'Learn how to craft engaging content that resonates with your audience and drives social media success.',
-    date: '2023-05-05',
-    author: 'Emily Brown',
-    category: 'Content Creation'
+    title: 'Effective Techniques for Long-Tail Keyword Targeting',
+    excerpt: 'Discover how targeting long-tail keywords can help you rank higher and attract more relevant traffic to your site.',
+    date: '2023-08-25',
+    author: 'Neil Patel',
+    category: 'SEO'
+  },
+  {
+    title: 'Optimizing for Voice Search: Strategies for 2023',
+    excerpt: 'Explore techniques to optimize your content for voice search, focusing on conversational keywords and user intent.',
+    date: '2023-07-15',
+    author: 'Ahrefs Team',
+    category: 'SEO'
   }
 ]
 
