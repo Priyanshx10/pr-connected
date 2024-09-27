@@ -10,6 +10,7 @@ export default function ContactPage() {
     email: '',
     message: ''
   })
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -19,12 +20,29 @@ export default function ContactPage() {
     }))
   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // Here you would typically send the form data to your backend
-    console.log('Form submitted:', formData)
-    // Reset form after submission
-    setFormData({ name: '', email: '', message: '' })
+    setStatus('loading')
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to send message')
+      }
+
+      setStatus('success')
+      setFormData({ name: '', email: '', message: '' })
+    } catch (error) {
+      console.error('Error sending message:', error)
+      setStatus('error')
+    }
   }
 
   return (
@@ -85,10 +103,17 @@ export default function ContactPage() {
               </div>
               <button 
                 type="submit" 
-                className="bg-teal-500 text-white font-bold py-2 px-4 rounded-md hover:bg-teal-600 transition duration-300"
+                className="bg-teal-500 text-white font-bold py-2 px-4 rounded-md hover:bg-teal-600 transition duration-300 disabled:opacity-50"
+                disabled={status === 'loading'}
               >
-                Send Message
+                {status === 'loading' ? 'Sending...' : 'Send Message'}
               </button>
+              {status === 'success' && (
+                <p className="mt-4 text-green-600">Message sent successfully!</p>
+              )}
+              {status === 'error' && (
+                <p className="mt-4 text-red-600">Failed to send message. Please try again.</p>
+              )}
             </form>
           </motion.div>
 
