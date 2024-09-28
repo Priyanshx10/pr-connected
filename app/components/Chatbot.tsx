@@ -11,10 +11,15 @@ export default function Chatbot() {
   const [input, setInput] = useState('')
   const [isUploading, setIsUploading] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
 
   const handleSend = useCallback(async () => {
     if (input.trim() === '') return
+
+    if (status !== 'authenticated') {
+      console.error('User is not authenticated')
+      return
+    }
 
     setMessages(prev => [...prev, { text: input, isUser: true }])
     setInput('')
@@ -38,7 +43,7 @@ export default function Chatbot() {
       console.error('Error sending message:', error)
       setMessages(prev => [...prev, { text: "Sorry, I'm having trouble responding right now. Please try again later.", isUser: false }])
     }
-  }, [input, session?.user?.id])
+  }, [input, session?.user?.id, status])
 
   const handleFileUpload = useCallback(async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]

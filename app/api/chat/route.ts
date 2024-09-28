@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
 
@@ -8,7 +7,15 @@ const openai = new OpenAI({
 
 export async function POST(req: Request) {
   try {
+    if (!req.headers.get('Content-Type')?.includes('application/json')) {
+      return NextResponse.json({ error: 'Invalid request format' }, { status: 400 });
+    }
+
     const { message, userId } = await req.json();
+
+    if (!message || !userId) {
+      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+    }
 
     const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
@@ -17,6 +24,10 @@ export async function POST(req: Request) {
         { role: "user", content: message }
       ],
     });
+
+    if (!completion.choices || completion.choices.length === 0) {
+      return NextResponse.json({ error: 'No response from OpenAI' }, { status: 500 });
+    }
 
     const reply = completion.choices[0].message.content;
 
