@@ -3,8 +3,8 @@ import mongoose from 'mongoose';
 
 declare global {
   var mongoose: {
-    conn: typeof mongoose | null;
-    promise: Promise<typeof mongoose> | null;
+    conn: mongoose.Mongoose | null;
+    promise: Promise<{ conn: mongoose.Mongoose | null; promise: null }> | null;
   };
 }
 
@@ -14,7 +14,10 @@ if (!MONGODB_URI) {
   throw new Error('Please define the MONGODB_URI environment variable inside .env.local');
 }
 
-let cached = global.mongoose;
+let cached: {
+  conn: mongoose.Mongoose | null;
+  promise: Promise<{ conn: mongoose.Mongoose | null; promise: null }> | null;
+} = global.mongoose;
 
 if (!cached) {
   cached = global.mongoose = { conn: null, promise: null };
@@ -31,18 +34,19 @@ async function dbConnect() {
     };
 
     cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
-      return mongoose;
+      return { conn: mongoose, promise: null };
     });
   }
 
   try {
-    cached.conn = await cached.promise;
+    const result = await cached.promise;
+    cached.conn = result.conn;
+    cached.promise = null;
+    return cached.conn;
   } catch (e) {
     cached.promise = null;
     throw e;
   }
-
-  return cached.conn;
 }
 
 export default dbConnect;

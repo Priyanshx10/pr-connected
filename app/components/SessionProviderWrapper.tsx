@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // SessionProviderWrapper.tsx
 "use client"; // This line makes this component a client component
 
