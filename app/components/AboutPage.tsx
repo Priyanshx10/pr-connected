@@ -1,8 +1,8 @@
 'use client'
 
-import Image from 'next/image'
-import { motion } from 'framer-motion'
-import CEO from '../../public/images/CEO.jpg'
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+import CEO from '../../public/images/CEO.jpg';
 
 const teamMembers = [
   { name: 'Priyansh Yadav', role: 'CEO & Founder', image: CEO },
@@ -10,7 +10,6 @@ const teamMembers = [
   { name: 'Emily Brown', role: 'QR Specialist', image: '/placeholder.svg' },
   { name: 'Michael Johnson', role: 'Content Strategist', image: '/placeholder.svg' },
 ];
-
 
 export default function AboutUs() {
   return (
@@ -48,7 +47,14 @@ export default function AboutUs() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <Image src={member.image} alt={member.name} width={300} height={300} className="w-full h-64 object-cover" />
+                <Image 
+                  src={member.image} 
+                  alt={member.name} 
+                  width={300} 
+                  height={300} 
+                  className="w-full h-64 object-cover" 
+                  priority
+                />
                 <div className="p-6">
                   <h3 className="text-xl font-semibold mb-2">{member.name}</h3>
                   <p className="text-gray-600">{member.role}</p>
@@ -59,5 +65,5 @@ export default function AboutUs() {
         </div>
       </section>
     </div>
-  )
+  );
 }

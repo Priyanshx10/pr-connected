@@ -1,6 +1,7 @@
 'use client'
-import Link from 'next/link'
-import { motion } from 'framer-motion'
+
+import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 const blogPosts = [
   {
@@ -24,7 +25,7 @@ const blogPosts = [
     author: 'Ahrefs Team',
     category: 'SEO'
   }
-]
+];
 
 export default function Resources() {
   return (
@@ -43,7 +44,7 @@ export default function Resources() {
             {blogPosts.map((post, index) => (
               <motion.div 
                 key={post.title}
-                className="bg-white rounded-lg shadow-md overflow-hidden"
+                className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -58,7 +59,7 @@ export default function Resources() {
                   </div>
                 </div>
                 <div className="px-6 py-4 bg-gray-50">
-                  <Link href="#" className="text-teal-500 hover:text-teal-600 font-semibold">
+                  <Link href="#" className="text-teal-500 hover:text-teal-600 font-semibold transition duration-300">
                     Read More &rarr;
                   </Link>
                 </div>
@@ -68,5 +69,5 @@ export default function Resources() {
         </div>
       </section>
     </div>
-  )
+  );
 }

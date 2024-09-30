@@ -41,7 +41,7 @@ const services = [
 
 export default function Services() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       <section className="py-20 bg-gradient-to-r from-teal-500 to-blue-500 text-white">
         <div className="container mx-auto px-6 text-center">
           <h1 className="text-4xl font-bold mb-4">Our Services</h1>

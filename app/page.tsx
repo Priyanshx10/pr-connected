@@ -1,10 +1,13 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import Team from '../public/images/team.jpg'
+import WhyPRConnected from './components/Why/WhyPR'
+import AboutPage from './about/page'
+import ServicePage from './services/page'
 
 export default function Home() {
   return (
-    <div>
+    <div className='bg-white'>
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-teal-500 to-blue-500 text-white py-20">
         <div className="container mx-auto px-6 text-center">
@@ -36,29 +39,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services Preview */}
-      <section className="bg-gray-100 py-20">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold text-center mb-12">Our Services</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-xl font-semibold mb-4">Online Presence Development</h3>
-              <p className="text-gray-600 mb-4">Enhance your digital visibility with our expert website design and SEO strategies.</p>
-              <Link href="/services#online-presence" className="text-teal-600 hover:text-teal-800">Learn More &rarr;</Link>
-            </div>
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-xl font-semibold mb-4">QR Automation Solutions</h3>
-              <p className="text-gray-600 mb-4">Bridge physical and digital experiences with our innovative QR code integration.</p>
-              <Link href="/services#qr-automation" className="text-teal-600 hover:text-teal-800">Learn More &rarr;</Link>
-            </div>
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-xl font-semibold mb-4">Content Creation</h3>
-              <p className="text-gray-600 mb-4">Engage your audience with our professional blog writing, social media management, and video production.</p>
-              <Link href="/services#content-creation" className="text-teal-600 hover:text-teal-800">Learn More &rarr;</Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <AboutPage/>
+      <ServicePage/>
+      <WhyPRConnected />
 
       {/* Call to Action */}
       <section className="bg-teal-600 text-white py-20">
