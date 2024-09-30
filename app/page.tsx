@@ -54,16 +54,17 @@ export default function Home() {
       <ServicePage/>
       <WhyPRConnected />
 
-      {/* Call to Action */}
-      <section className="bg-teal-600 text-white py-20">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Brand?</h2>
-          <p className="text-xl mb-8">Let&apos;s create innovative marketing solutions together.</p>
-          <Link href="/contact" className="bg-white text-teal-600 py-2 px-6 rounded-full text-lg font-semibold hover:bg-gray-100 transition duration-300">
-            Contact Us Today
+      {/* CTA Section */}
+      <section className="bg-teal-500 py-20">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold mb-6 text-white">Ready to Transform Your PR Strategy?</h2>
+          <p className="text-xl mb-8 text-teal-100">Let&apos;s create a customized QR-powered campaign for your brand.</p>
+          <Link href="/contact" className="bg-white text-teal-500 font-bold py-3 px-6 rounded-full hover:bg-gray-100 transition duration-300 inline-flex items-center">
+            Contact Us
+            <ArrowRight className="ml-2" />
           </Link>
         </div>
       </section>
     </div>
-  )
+  );
 }
