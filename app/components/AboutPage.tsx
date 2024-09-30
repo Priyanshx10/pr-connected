@@ -3,12 +3,12 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import CEO from '../../public/images/CEO.jpg';
+import VP from '../../public/images/VP.jpeg';
 
 const teamMembers = [
-  { name: 'Priyansh Yadav', role: 'CEO & Founder', image: CEO },
-  { name: 'John Smith', role: 'Marketing Director', image: '/placeholder.svg' },
-  { name: 'Emily Brown', role: 'QR Specialist', image: '/placeholder.svg' },
-  { name: 'Michael Johnson', role: 'Content Strategist', image: '/placeholder.svg' },
+  { name: 'Priyansh Yadav', role: 'CEO', image: CEO },
+  { name: 'Krapanshu Sharma', role: 'Vice President', image: VP },
+
 ];
 
 export default function AboutUs() {

@@ -14,12 +14,19 @@ export default function Home() {
         <div className="container mx-auto px-6 text-center">
           <h1 className="text-5xl font-bold mb-4">Transform Your Brand with PR-Connect</h1>
           <p className="text-xl mb-8">Innovative Marketing Solutions & QR Code Integration</p>
-          <Link href="/contact" className="bg-white text-teal-600 py-3 mx-20 my-20 px-6 rounded-full text-lg font-semibold hover:bg-gray-100 transition duration-300">
-            Get Started
-          </Link>
-          <button className="bg-white text-teal-600 py-2 px-6 rounded-full text-lg font-semibold hover:bg-gray-100 transition duration-300">
-            <SignInButton />
-          </button>
+          <div className="flex flex-col md:flex-row justify-center items-center my-20 mx-5">
+            <Link 
+              href="/contact" 
+              className="bg-white text-teal-600 py-3 px-6 rounded-full text-lg font-semibold hover:bg-gray-100 transition duration-300 mb-4 md:mb-0 md:mr-4"
+            >
+              Get Started
+            </Link>
+            <button 
+              className="bg-white text-teal-600 py-2 px-6 rounded-full text-lg font-semibold hover:bg-gray-100 transition duration-300"
+            >
+              <SignInButton />
+            </button>
+          </div>
         </div>
       </section>
 
