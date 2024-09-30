@@ -1,11 +1,11 @@
-import './globals.css';
-import { Inter } from 'next/font/google';
-import Header from '@/app/components/Header';
-import Footer from '@/app/components/Footer';
-import DynamicCursor from '@/app/components/DynamicCursor';
-import Chatbot from '@/app/components/Chatbot';
-import SessionProviderWrapper from '@/app/components/SessionProviderWrapper'; // Import the wrapper
-import { getServerSession } from 'next-auth'; // Import getServerSession
+
+import './globals.css'
+import { Inter } from 'next/font/google'
+import { ClerkProvider } from '@clerk/nextjs'
+import { dark } from '@clerk/themes'
+import Header from './components/Header'
+import Footer from './components/Footer'
+
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,16 +22,21 @@ export default async function RootLayout({
   const session = await getServerSession(); // Fetch the server session
 
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <SessionProviderWrapper session={session}>
-          <Header />
-          <main>{children}</main>
-          <Footer />
-          <DynamicCursor />
-          <Chatbot />
-        </SessionProviderWrapper>
-      </body>
-    </html>
-  );
-}
+    <ClerkProvider
+      appearance={{
+        baseTheme: dark
+      }}
+      afterSignInUrl="/dashboard"
+      afterSignUpUrl="/dashboard"
+    >
+      <html lang="en">
+        <body className={`${inter.className} bg-background text-foreground`}>
+          <div className="flex flex-col min-h-screen">
+            <Header />
+            <main className="flex-grow">{children}</main>
+            <Footer />
+          </div>
+        </body>
+      </html>
+    </ClerkProvider>
+  )

@@ -1,10 +1,18 @@
 'use client'
 
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Users, Lightbulb, TrendingUp } from 'lucide-react';
+import CEO from '../../public/images/CEO.jpg';
+import VP from '../../public/images/VP.jpeg';
 
-export default function About() {
+const teamMembers = [
+  { name: 'Priyansh Yadav', role: 'CEO', image: CEO },
+  { name: 'Krapanshu Sharma', role: 'Vice President', image: VP },
+];
+
+export default function AboutUs() {
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
       <motion.section 
@@ -50,18 +58,36 @@ export default function About() {
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8, duration: 0.5 }}
-          className="bg-teal-500 text-white p-8 rounded-lg shadow-lg"
-        >
-          <h2 className="text-2xl font-bold mb-4">Our Mission</h2>
-          <p className="text-lg">
-            At PR-Connect, we strive to bridge the gap between traditional PR and modern technology. Our mission is to empower brands with innovative QR-based solutions that create meaningful connections and drive measurable results.
-          </p>
-        </motion.div>
-      </motion.section>
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-6">
+          <h2 className="text-3xl font-bold mb-12 text-center">Our Team</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {teamMembers.map((member, index) => (
+              <motion.div 
+                key={member.name}
+                className="bg-gray-50 rounded-lg shadow-md overflow-hidden"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <Image 
+                  src={member.image} 
+                  alt={member.name} 
+                  width={300} 
+                  height={300} 
+                  className="w-full h-64 object-cover" 
+                  priority
+                />
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold mb-2">{member.name}</h3>
+                  <p className="text-gray-600">{member.role}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 }

@@ -14,29 +14,15 @@ export default function Services() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
-      <motion.section 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="container mx-auto px-4 py-20"
-      >
-        <motion.h1 
-          initial={{ y: -50 }}
-          animate={{ y: 0 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-          className="text-4xl md:text-5xl font-bold mb-8 text-center text-gray-800"
-        >
-          Our Services
-        </motion.h1>
-        <motion.p 
-          initial={{ y: 50 }}
-          animate={{ y: 0 }}
-          transition={{ delay: 0.4, duration: 0.5 }}
-          className="text-xl mb-12 text-center text-gray-600 max-w-3xl mx-auto"
-        >
-          Discover our range of innovative PR services designed to elevate your brand and engage your audience like never before.
-        </motion.p>
+
+    <div className="min-h-screen bg-white">
+      <section className="py-20 bg-gradient-to-r from-teal-500 to-blue-500 text-white">
+        <div className="container mx-auto px-6 text-center">
+          <h1 className="text-4xl font-bold mb-4">Our Services</h1>
+          <p className="text-xl mb-8">Innovative solutions to transform your brand</p>
+        </div>
+      </section>
+
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
