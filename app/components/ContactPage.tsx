@@ -130,21 +130,21 @@ export default function ContactPage() {
                 <MapPin className="w-6 h-6 text-teal-500 mr-4" />
                 <div>
                   <h3 className="font-bold">Address</h3>
-                  <p className="text-gray-600">123 PR Street, Marketing City, 12345</p>
+                  <p className="text-gray-600"> Nexus Treasure Island Mall, Indore, India</p>
                 </div>
               </div>
               <div className="flex items-start">
                 <Phone className="w-6 h-6 text-teal-500 mr-4" />
                 <div>
                   <h3 className="font-bold">Phone</h3>
-                  <p className="text-gray-600">+1 (123) 456-7890</p>
+                  <p className="text-gray-600">+91 (700) 056-6395</p>
                 </div>
               </div>
               <div className="flex items-start">
                 <Mail className="w-6 h-6 text-teal-500 mr-4" />
                 <div>
                   <h3 className="font-bold">Email</h3>
-                  <p className="text-gray-600">contact@pr-connect.com</p>
+                  <p className="text-gray-600">priyanshyadav1012@gmail.com</p>
                 </div>
               </div>
             </div>

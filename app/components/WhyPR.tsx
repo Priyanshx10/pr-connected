@@ -90,9 +90,9 @@ export default function WhyPR() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <div className="md:flex">
-                <div className="md:flex-shrink-0 flex items-center justify-center  bg-teal-500 text-white p-6">
-                  <h2 className="text-xl font-semibold">{reason.title}</h2>
-                </div>
+              <div className="md:flex-shrink-0 flex items-center justify-center bg-teal-500 text-white p-6 w-full md:w-1/4">
+                <h2 className="text-xl font-semibold text-center">{reason.title}</h2>
+              </div>
                 <div className="p-8">
                   <p className="mt-2 text-gray-600">{reason.description}</p>
                   <ul className="mt-4 space-y-2">

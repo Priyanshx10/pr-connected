@@ -4,6 +4,7 @@ import Team from '../public/images/team.jpg'
 import WhyPRConnected from './components/WhyPR'
 import AboutPage from './about/page'
 import ServicePage from './services/page'
+import { SignInButton } from '@clerk/nextjs'
 
 export default function Home() {
   return (
@@ -13,9 +14,12 @@ export default function Home() {
         <div className="container mx-auto px-6 text-center">
           <h1 className="text-5xl font-bold mb-4">Transform Your Brand with PR-Connect</h1>
           <p className="text-xl mb-8">Innovative Marketing Solutions & QR Code Integration</p>
-          <Link href="/contact" className="bg-white text-teal-600 py-2 px-6 rounded-full text-lg font-semibold hover:bg-gray-100 transition duration-300">
+          <Link href="/contact" className="bg-white text-teal-600 py-3 mx-20 my-20 px-6 rounded-full text-lg font-semibold hover:bg-gray-100 transition duration-300">
             Get Started
           </Link>
+          <button className="bg-white text-teal-600 py-2 px-6 rounded-full text-lg font-semibold hover:bg-gray-100 transition duration-300">
+            <SignInButton />
+          </button>
         </div>
       </section>
 
