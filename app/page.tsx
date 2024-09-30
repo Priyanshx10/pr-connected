@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import Team from '../public/images/team.jpg'
-import WhyPRConnected from './components/Why/WhyPR'
+import WhyPRConnected from './components/WhyPR'
 import AboutPage from './about/page'
 import ServicePage from './services/page'
 
