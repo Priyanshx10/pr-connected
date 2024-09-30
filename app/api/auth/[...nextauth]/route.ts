@@ -1,15 +1,18 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import NextAuth from "next-auth";
+import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GithubProvider from "next-auth/providers/github";
 import { MongoClient } from 'mongodb';
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 
 const clientPromise = async () => {
-  const client = new MongoClient('mongodb://localhost:27017/');
+  const client = new MongoClient(process.env.MONGODB_URI || 'mongodb://localhost:27017/');
   return client;
 };
 
-const handler = NextAuth({
-  adapter: MongoDBAdapter(await clientPromise()), 
+export const authOptions: NextAuthOptions = {
+  adapter: MongoDBAdapter(clientPromise() as any),
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -25,6 +28,11 @@ const handler = NextAuth({
         return null; // Return null if user not found
       },
     }),
+    GithubProvider({
+      clientId: process.env.GITHUB_ID!,
+      clientSecret: process.env.GITHUB_SECRET!,
+    }),
+    // Add other providers here
   ],
   session: {
     strategy: "jwt",
@@ -43,6 +51,8 @@ const handler = NextAuth({
       return session;
     },
   },
-});
+  // Add other NextAuth configurations here
+};
 
+const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };

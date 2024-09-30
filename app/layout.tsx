@@ -1,11 +1,12 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
-import Header from '@/app/components/Header';
 import Footer from '@/app/components/Footer';
 import DynamicCursor from '@/app/components/DynamicCursor';
 import Chatbot from '@/app/components/Chatbot';
-import SessionProviderWrapper from '@/app/components/SessionProviderWrapper'; // Import the wrapper
-import { getServerSession } from 'next-auth'; // Import getServerSession
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'; 
+import { ClerkProvider } from '@clerk/nextjs';
+import ClientLayout from '@/app/components/ClientLayout';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,19 +20,20 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession(); // Fetch the server session
+  const session = await getServerSession(authOptions);
 
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <SessionProviderWrapper session={session}>
-          <Header />
-          <main>{children}</main>
-          <Footer />
-          <DynamicCursor />
-          <Chatbot />
-        </SessionProviderWrapper>
-      </body>
+      <ClerkProvider>
+        <body className={inter.className}>
+          <ClientLayout session={session}>
+            <main>{children}</main>
+            <Footer />
+            <DynamicCursor />
+            <Chatbot />
+          </ClientLayout>
+        </body>
+      </ClerkProvider>
     </html>
   );
 }
