@@ -3,11 +3,13 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import CEO from '../../public/images/CEO.jpg';
+import COO from '../../public/images/COO.jpeg';
 import VP from '../../public/images/VP.jpeg';
 
 const teamMembers = [
   { name: 'Priyansh Yadav', role: 'CEO', image: CEO },
   { name: 'Krapanshu Sharma', role: 'Vice President', image: VP },
+  { name: 'Rohit Surawat ', role: 'Chief Operating Officer', image: COO },
 
 ];
 
