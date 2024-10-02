@@ -1,22 +1,24 @@
-import './globals.css'
-import { Inter } from 'next/font/google'
-import { ClerkProvider } from '@clerk/nextjs'
-import { dark } from '@clerk/themes'
-import Header from './components/Header'
-import Footer from './components/Footer'
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import './globals.css';
+import { Inter } from 'next/font/google';
+import { ClerkProvider } from '@clerk/nextjs';
+import { dark } from '@clerk/themes';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'PR-Connect',
   description: 'Innovative Marketing Solutions & QR Code Integration',
-}
+};
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
+
   return (
     <ClerkProvider
       appearance={{
@@ -35,5 +37,5 @@ export default function RootLayout({
         </body>
       </html>
     </ClerkProvider>
-  )
+  );
 }

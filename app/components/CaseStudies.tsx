@@ -1,85 +1,76 @@
 'use client'
 
-import Image from 'next/image'
-import { motion } from 'framer-motion'
-import Case from '../../public/images/casestudy.jpg'
-
-const caseStudies = [
-  {
-    title: 'Boosting Brand Engagement with QR Codes',
-    client: 'TechCorp Inc.',
-    description: 'Implemented a QR code campaign that increased customer engagement by 150% and drove a 30% increase in sales.',
-    image: Case ,
-    metrics: ['150% increase in engagement', '30% increase in sales', '50,000 QR code scans'],
-    testimonial: 'PR-Connect transformed our marketing strategy. The QR code campaign they designed exceeded our expectations and significantly boosted our sales.',
-    author: 'John Doe, CEO of TechCorp Inc.'
-  },
-  {
-    title: 'Revamping Online Presence for Local Business',
-    client: 'Green Leaf Cafe',
-    description: 'Redesigned website and implemented SEO strategies, resulting in a 200% increase in organic traffic and 50% boost in online orders.',
-    image: Case,
-    metrics: ['200% increase in organic traffic', '50% increase in online orders', '1st page Google ranking for key terms'],
-    testimonial: 'The team at PR-Connect completely transformed our online presence. We\'ve seen a dramatic increase in customers finding us online.',
-    author: 'Jane Smith, Owner of Green Leaf Cafe'
-  }
-]
+import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 
 export default function CaseStudies() {
-  return (
-    <div className="min-h-screen bg-gray-50">
-      <section className="py-20 bg-gradient-to-r from-teal-500 to-blue-500 text-white">
-        <div className="container mx-auto px-6 text-center">
-          <h1 className="text-4xl font-bold mb-4">Case Studies</h1>
-          <p className="text-xl mb-8">Discover how we&apos;ve helped businesses achieve their goals</p>
-        </div>
-      </section>
+  const caseStudies = [
+    { title: "Tech Giant's QR Revolution", description: "How we helped a leading tech company increase engagement by 250% with QR-powered product packaging.", image: "/images/case-study-1.jpg" },
+    { title: "Retail Chain's In-Store Magic", description: "Our QR strategy transformed the in-store experience for a major retail chain, boosting sales by 30%.", image: "/images/case-study-2.jpg" },
+    { title: "Non-Profit's Donation Surge", description: "We helped a non-profit organization increase donations by 180% through an innovative QR campaign.", image: "/images/case-study-3.jpg" },
+  ];
 
-      <section className="py-20">
-        <div className="container mx-auto px-6">
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
+      <motion.section 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="container mx-auto px-4 py-20"
+      >
+        <motion.h1 
+          initial={{ y: -50 }}
+          animate={{ y: 0 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+          className="text-4xl md:text-5xl font-bold mb-8 text-center text-gray-800"
+        >
+          Case Studies
+        </motion.h1>
+        <motion.p 
+          initial={{ y: 50 }}
+          animate={{ y: 0 }}
+          transition={{ delay: 0.4, duration: 0.5 }}
+          className="text-xl mb-12 text-center text-gray-600 max-w-3xl mx-auto"
+        >
+          Explore how we&apos;ve helped businesses achieve remarkable results through our innovative QR-powered PR strategies.
+        </motion.p>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {caseStudies.map((study, index) => (
-            <motion.div 
-              key={study.title}
-              className="mb-16 bg-white rounded-lg shadow-md overflow-hidden"
-              initial={{ opacity: 0, y: 20 }}
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ delay: 0.1 * index, duration: 0.5 }}
+              className="bg-white rounded-lg shadow-md overflow-hidden"
             >
-              <div className="md:flex">
-                <div className="md:flex-shrink-0">
-                  <Image src={study.image} alt={study.title} width={400} height={300} className="h-48 w-full object-cover md:h-full md:w-48" />
-                </div>
-                <div className="p-8">
-                  <div className="uppercase tracking-wide text-sm text-teal-500 font-semibold">{study.client}</div>
-                  <h2 className="block mt-1 text-2xl leading-tight font-bold text-gray-900">{study.title}</h2>
-                  <p className="mt-2 text-gray-600">{study.description}</p>
-                  <div className="mt-4">
-                    <h3 className="text-lg font-semibold text-gray-900">Key Metrics:</h3>
-                    <ul className="mt-2 space-y-2">
-                      {study.metrics.map((metric, metricIndex) => (
-                        <motion.li 
-                          key={metricIndex}
-                          className="flex items-center text-gray-600"
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.3, delay: (index * 0.1) + (metricIndex * 0.1) }}
-                        >
-                          <svg className="h-4 w-4 mr-2 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                          </svg>
-                          {metric}
-                        </motion.li>
-                      ))}
-                    </ul>
-                  </div>
-                  <blockquote className="mt-6 italic text-gray-600">&quot;{study.testimonial}&quot;</blockquote>
-                  <p className="mt-2 text-sm text-gray-500">- {study.author}</p>
-                </div>
+              <Image src={study.image} alt={study.title} width={400} height={250} className="w-full h-48 object-cover" />
+              <div className="p-6">
+                <h3 className="text-xl font-semibold mb-2 text-gray-800">{study.title}</h3>
+                <p className="text-gray-600 mb-4">{study.description}</p>
+                <a href="#" className="text-teal-500 font-semibold hover:text-teal-600 transition duration-300 inline-flex items-center">
+                  Read More
+                  <ArrowRight className="ml-2" />
+                </a>
               </div>
             </motion.div>
           ))}
         </div>
-      </section>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8, duration: 0.5 }}
+          className="mt-16 text-center"
+        >
+          <h2 className="text-2xl font-bold mb-4 text-gray-800">Ready to be our next success story?</h2>
+          <a href="/contact" className="bg-teal-500 text-white font-bold py-3 px-6 rounded-full hover:bg-teal-600 transition duration-300 inline-flex items-center">
+            Get in Touch
+            <ArrowRight className="ml-2" />
+          </a>
+        </motion.div>
+      </motion.section>
     </div>
-  )
+  );
 }

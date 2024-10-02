@@ -2,6 +2,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
 
+
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -287,3 +288,4 @@ export default function Resources() {
       </div>
     )
   }
+
