@@ -1,11 +1,10 @@
-
-import './globals.css'
-import { Inter } from 'next/font/google'
-import { ClerkProvider } from '@clerk/nextjs'
-import { dark } from '@clerk/themes'
-import Header from './components/Header'
-import Footer from './components/Footer'
-
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import './globals.css';
+import { Inter } from 'next/font/google';
+import { ClerkProvider } from '@clerk/nextjs';
+import { dark } from '@clerk/themes';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,7 +18,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession(); // Fetch the server session
 
   return (
     <ClerkProvider
@@ -39,4 +37,5 @@ export default async function RootLayout({
         </body>
       </html>
     </ClerkProvider>
-  )
+  );
+}

@@ -5,6 +5,7 @@ import WhyPRConnected from './components/WhyPR'
 import AboutPage from './about/page'
 import ServicePage from './services/page'
 import { SignInButton } from '@clerk/nextjs'
+import { ArrowRight } from 'lucide-react'
 
 export default function Home() {
   return (
