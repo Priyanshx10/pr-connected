@@ -16,8 +16,8 @@ const SignInPage: React.FC = () => {
           appearance={{
             baseTheme: {
               colors: {
-                primary: '#4F46E5', // Customize primary color
-                secondary: '#FFFFFF', // Customize secondary color
+                primary: '#4F46E5', 
+                secondary: '#FFFFFF', 
               },
             },
           }}
