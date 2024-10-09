@@ -14,7 +14,7 @@ const navItems = [
   { href: '/case-studies', label: 'Case Studies' },
   { href: '/resources', label: 'Resources' },
   { href: '/contact', label: 'Contact Us' },
-  { href: '/dashboard', label: 'Dashboard ' },
+  { href: '/dashboard', label: 'Dashboard' },
 ]
 
 export default function Header() {
@@ -23,40 +23,41 @@ export default function Header() {
   const toggleMenu = () => setIsOpen(!isOpen)
 
   return (
-    <header className="bg-background shadow-md relative z-50">
+    <header className="bg-background shadow-lg z-50 relative">
       <nav className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
-          <Link href="/" className="text-2xl font-bold text-primary">PR-Connect</Link>
-          
+          <Link href="/" className="text-2xl font-bold text-primary">
+            PR-Connect
+          </Link>
+
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-6">
+          <div className="hidden lg:flex space-x-6 items-center">
             {navItems.map((item) => (
-              <Link 
-                key={item.href} 
-                href={item.href} 
-                className="text-foreground hover:text-primary transition duration-300"
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-foreground hover:text-primary transition duration-200"
               >
                 {item.label}
               </Link>
             ))}
+            <div>
+              <SignedOut>
+                <SignInButton mode="modal">
+                  <Button variant="outline">Sign In</Button>
+                </SignInButton>
+              </SignedOut>
+              <SignedIn>
+                <UserButton afterSignOutUrl="/" />
+              </SignedIn>
+            </div>
           </div>
 
-          <div className="hidden md:block">
-            <SignedOut>
-              <SignInButton mode="modal">
-                <Button variant="outline">Sign In</Button>
-              </SignInButton>
-            </SignedOut>
-            <SignedIn>
-              <UserButton afterSignOutUrl="/" />
-            </SignedIn>
-          </div>
-
-          {/* Mobile Menu Button */}
+          {/* Mobile and Medium Screen Menu Button */}
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden"
+            className="lg:hidden"
             onClick={toggleMenu}
             aria-label="Toggle menu"
           >
@@ -65,7 +66,7 @@ export default function Header() {
         </div>
       </nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile and Medium Screen Menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -73,13 +74,13 @@ export default function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden absolute top-full left-0 right-0 bg-background shadow-md"
+            className="lg:hidden absolute top-full left-0 right-0 bg-background shadow-md"
           >
             <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
               {navItems.map((item) => (
-                <Link 
-                  key={item.href} 
-                  href={item.href} 
+                <Link
+                  key={item.href}
+                  href={item.href}
                   className="text-foreground hover:text-primary transition duration-300"
                   onClick={() => setIsOpen(false)}
                 >

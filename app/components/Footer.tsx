@@ -18,7 +18,7 @@ const Footer: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <div className="space-y-6">
-            <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-300 to-white">
+            <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-300 to-white">
               Pr-Connect 
             </h3>
             <p className="text-sm text-gray-200">
@@ -29,11 +29,11 @@ const Footer: React.FC = () => {
             </p>
           </div>
           <div className="space-y-6">
-            <h4 className="text-xl font-semibold text-blue-300">Quick Links</h4>
+            <h4 className="text-xl font-semibold text-teal-300">Quick Links</h4>
             <ul className="space-y-3">
               {['About', 'Services', 'Resources', 'Contact'].map((item) => (
                 <li key={item}>
-                  <Link href={`/${item.toLowerCase()}`} className="text-gray-200 hover:text-blue-300 transition duration-300 ease-in-out">
+                  <Link href={`/${item.toLowerCase()}`} className="text-gray-200 hover:text-teal-300 transition duration-300 ease-in-out">
                     {item}
                   </Link>
                 </li>
@@ -41,7 +41,7 @@ const Footer: React.FC = () => {
             </ul>
           </div>
           <div className="space-y-6">
-            <h4 className="text-xl font-semibold text-blue-300">Connect With Us</h4>
+            <h4 className="text-xl font-semibold text-teal-300">Connect With Us</h4>
             <div className="flex space-x-5">
               {socialLinks.map(({ Icon, href }, index) => (
                 <a
@@ -49,7 +49,7 @@ const Footer: React.FC = () => {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-200 hover:text-blue-300 transition duration-300 ease-in-out"
+                  className="text-gray-200 hover:text-teal-300 transition duration-300 ease-in-out"
                   aria-label={`Social media link ${index + 1}`}
                 >
                   <Icon className="w-6 h-6" />
@@ -63,13 +63,13 @@ const Footer: React.FC = () => {
                   <input
                     type="email"
                     placeholder="Enter your email"
-                    className="w-full bg-blue-800 text-white px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    className="w-full bg-teal-800 text-white px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-400"
                   />
-                  <FaEnvelope className="absolute right-3 top-1/2 transform -translate-y-1/2 text-blue-300" />
+                  <FaEnvelope className="absolute right-3 top-1/2 transform -translate-y-1/2 text-teal-300" />
                 </div>
                 <button
                   type="submit"
-                  className="bg-white text-blue-800 px-6 py-3 rounded-md transition duration-300 ease-in-out hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  className="bg-white text-teal-800 px-6 py-3 rounded-md transition duration-300 ease-in-out hover:bg-teal-100 focus:outline-none focus:ring-2 focus:ring-teal-400"
                 >
                   Subscribe
                 </button>
@@ -77,7 +77,7 @@ const Footer: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="mt-12 pt-8 border-t border-blue-600 text-center">
+        <div className="mt-12 pt-8 border-t border-teal-600 text-center">
           <p className="text-sm text-gray-300">
             Committed to sustainable AI solutions for a greener future.
           </p>

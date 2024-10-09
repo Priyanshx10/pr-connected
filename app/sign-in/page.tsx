@@ -11,18 +11,16 @@ const SignInPage: React.FC = () => {
         <p className="mb-6 text-gray-600 text-center">
           Dashboard is available for the signed-in user only.
         </p>
-        <SignInButton 
-          mode="modal" 
-          appearance={{
-            baseTheme: {
-              colors: {
-                primary: '#4F46E5', 
-                secondary: '#FFFFFF', 
-              },
-            },
-          }}
-          className="w-full py-3 rounded-md text-white bg-blue-600 hover:bg-blue-700 transition duration-200"
-        />
+        <div className="w-full">
+          <SignInButton 
+            mode="modal" 
+          />
+        </div>
+        <style jsx>{`
+          .sign-in-button {
+            @apply w-full py-3 rounded-md text-white bg-blue-600 hover:bg-blue-700 transition duration-200;
+          }
+        `}</style>
       </div>
     </div>
   );
