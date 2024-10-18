@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaGithub, FaEnvelope } from 'react-icons/fa';
+import { FaFacebookF, FaTwitter, FaLinkedinIn, FaGithub, FaEnvelope } from 'react-icons/fa';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -8,7 +8,6 @@ const Footer: React.FC = () => {
   const socialLinks = [
     { Icon: FaFacebookF, href: 'https://priyansh-port-folio.vercel.app/' },
     { Icon: FaTwitter, href: 'https://x.com/Priyanshx10_' },
-    { Icon: FaInstagram, href: 'https://www.instagram.com/priyansh_10_/' },
     { Icon: FaLinkedinIn, href: 'https://www.linkedin.com/in/priyansh10' },
     { Icon: FaGithub, href: 'https://github.com/Priyanshx10' },
   ];

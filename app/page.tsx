@@ -3,10 +3,10 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { ArrowRight, ChevronLeft, ChevronRight, CheckCircle, QrCode, BarChart, Globe, Smartphone, Megaphone, Target } from 'lucide-react'
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 const unsplashITImages = [
   'https://images.unsplash.com/photo-1573167243872-43c6433b9d40?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
@@ -238,7 +238,7 @@ export default function Home() {
       <section className="bg-teal-500 py-20">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-6 text-white">Ready to Transform Your PR Strategy?</h2>
-          <p className="text-xl mb-8 text-teal-100">Let's create a customized QR-powered campaign for your brand.</p>
+          <p className="text-xl mb-8 text-teal-100">Let&#39;s create a customized QR-powered campaign for your brand.</p>
           <Button asChild size="lg" variant="secondary">
             <Link href="/contact">
               Contact Us <ArrowRight className="ml-2 h-4 w-4" />

@@ -2,6 +2,7 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
+import { GoogleAnalytics } from '@next/third-parties/google'
 import { dark } from '@clerk/themes';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -30,6 +31,7 @@ export default async function RootLayout({
       <html lang="en">
         <body className={`${inter.className} bg-background text-foreground`}>
           <div className="flex flex-col min-h-screen">
+          <GoogleAnalytics gaId="G-XYZ" />
             <Header />
             <main className="flex-grow">{children}</main>
             <Footer />

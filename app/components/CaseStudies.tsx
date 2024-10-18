@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, ArrowLeft, CheckCircle, BarChart, Users, Zap } from 'lucide-react';
 import Image from 'next/image';
@@ -8,12 +8,12 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
-// Import Unsplash images
 const unsplashImages = [
-  "https://plus.unsplash.com/premium_photo-1682464708085-95b4486e2c32?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",   // Example image for Tech Giant's QR Revolution
-  "https://images.unsplash.com/photo-1725088819905-058e8dd6a6e5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzB8fEFJfGVufDB8fDB8fHww",     // Example image for Retail Chain's In-Store Magic
-  "https://images.unsplash.com/photo-1532178324009-6b6adeca1741?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDZ8fEFJfGVufDB8fDB8fHww" // Example image for Non-Profit's Donation Surge
+  "https://plus.unsplash.com/premium_photo-1682464708085-95b4486e2c32?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1725088819905-058e8dd6a6e5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzB8fEFJfGVufDB8fDB8fHww",
+  "https://images.unsplash.com/photo-1532178324009-6b6adeca1741?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDZ8fEFJfGVufDB8fDB8fHww"
 ];
 
 const caseStudies = [
@@ -73,13 +73,13 @@ const caseStudies = [
 export default function CaseStudies() {
   const [currentStudy, setCurrentStudy] = useState(0);
 
-  const nextStudy = () => {
+  const nextStudy = useCallback(() => {
     setCurrentStudy((prev) => (prev + 1) % caseStudies.length);
-  };
+  }, []);
 
-  const prevStudy = () => {
+  const prevStudy = useCallback(() => {
     setCurrentStudy((prev) => (prev - 1 + caseStudies.length) % caseStudies.length);
-  };
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
@@ -87,14 +87,14 @@ export default function CaseStudies() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="container mx-auto px-4 py-20"
+        className="container mx-auto px-4 py-8 sm:py-12 md:py-16 lg:py-20"
       >
         {/* Header */}
         <motion.h1
           initial={{ y: -50 }}
           animate={{ y: 0 }}
           transition={{ delay: 0.2, duration: 0.5 }}
-          className="text-4xl md:text-5xl font-bold mb-8 text-center text-gray-800"
+          className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 md:mb-8 text-center text-gray-800"
         >
           Case Studies
         </motion.h1>
@@ -103,13 +103,13 @@ export default function CaseStudies() {
           initial={{ y: 50 }}
           animate={{ y: 0 }}
           transition={{ delay: 0.4, duration: 0.5 }}
-          className="text-xl mb-12 text-center text-gray-600 max-w-3xl mx-auto"
+          className="text-lg sm:text-xl mb-8 sm:mb-10 md:mb-12 text-center text-gray-600 max-w-3xl mx-auto"
         >
-          Explore how we've helped businesses achieve remarkable results through our innovative QR-powered PR strategies.
+          Explore how we&apos;ve helped businesses achieve remarkable results through our innovative QR-powered PR strategies.
         </motion.p>
 
         {/* Case Study Carousel */}
-        <div className="relative mb-16">
+        <div className="relative mb-12 sm:mb-16">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentStudy}
@@ -120,11 +120,11 @@ export default function CaseStudies() {
             >
               <Card className="w-full max-w-4xl mx-auto">
                 <CardHeader>
-                  <CardTitle className="text-2xl font-bold">{caseStudies[currentStudy].title}</CardTitle>
+                  <CardTitle className="text-xl sm:text-2xl font-bold">{caseStudies[currentStudy].title}</CardTitle>
                   <CardDescription>{caseStudies[currentStudy].description}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid md:grid-cols-2 gap-6 mb-6">
+                  <div className="grid sm:grid-cols-2 gap-6 mb-6">
                     <div>
                       <Image
                         src={caseStudies[currentStudy].image}
@@ -143,17 +143,19 @@ export default function CaseStudies() {
                         ))}
                       </ul>
                       <blockquote className="italic border-l-4 border-teal-500 pl-4">
-                        "{caseStudies[currentStudy].testimonial}"
+                        &ldquo;{caseStudies[currentStudy].testimonial}&ldquo;
                       </blockquote>
                     </div>
                   </div>
                   <Tabs defaultValue="challenge" className="w-full">
-                    <TabsList>
-                      <TabsTrigger value="challenge">Challenge</TabsTrigger>
-                      <TabsTrigger value="solution">Solution</TabsTrigger>
-                      <TabsTrigger value="implementation">Implementation</TabsTrigger>
-                      <TabsTrigger value="impact">Long-Term Impact</TabsTrigger>
-                    </TabsList>
+                    <ScrollArea className="w-full whitespace-nowrap rounded-md border">
+                      <TabsList>
+                        <TabsTrigger value="challenge">Challenge</TabsTrigger>
+                        <TabsTrigger value="solution">Solution</TabsTrigger>
+                        <TabsTrigger value="implementation">Implementation</TabsTrigger>
+                        <TabsTrigger value="impact">Long-Term Impact</TabsTrigger>
+                      </TabsList>
+                    </ScrollArea>
                     <TabsContent value="challenge">
                       <p>{caseStudies[currentStudy].challenge}</p>
                     </TabsContent>
@@ -186,9 +188,9 @@ export default function CaseStudies() {
         </div>
 
         {/* Our Approach Section */}
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">Our Approach</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center text-gray-800">Our Approach</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {[
               { icon: CheckCircle, title: "Tailored Strategies", description: "We craft unique QR campaigns that align perfectly with your brand and objectives." },
               { icon: BarChart, title: "Data-Driven Decisions", description: "Our strategies are backed by robust analytics and real-time data insights." },
@@ -197,11 +199,11 @@ export default function CaseStudies() {
             ].map((item, index) => (
               <Card key={index} className="text-center">
                 <CardHeader>
-                  <item.icon className="w-12 h-12 mx-auto text-teal-500 mb-4" />
-                  <CardTitle>{item.title}</CardTitle>
+                  <item.icon className="w-10 h-10 sm:w-12 sm:h-12 mx-auto text-teal-500 mb-4" />
+                  <CardTitle className="text-lg sm:text-xl">{item.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p>{item.description}</p>
+                  <p className="text-sm sm:text-base">{item.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -209,8 +211,8 @@ export default function CaseStudies() {
         </div>
 
         {/* FAQ Section */}
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">Frequently Asked Questions</h2>
+        <div className="mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center text-gray-800">Frequently Asked Questions</h2>
           <div className="space-y-4">
             {[
               { question: "How long does it typically take to see results from a QR campaign?", answer: "While results can vary, many of our clients see significant engagement within the first month of launching a campaign. Long-term benefits often become apparent within 3-6 months." },
@@ -220,10 +222,10 @@ export default function CaseStudies() {
             ].map((item, index) => (
               <Card key={index}>
                 <CardHeader>
-                  <CardTitle>{item.question}</CardTitle>
+                  <CardTitle className="text-base sm:text-lg">{item.question}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p>{item.answer}</p>
+                  <p className="text-sm sm:text-base">{item.answer}</p>
                 </CardContent>
               </Card>
             ))}
@@ -231,17 +233,18 @@ export default function CaseStudies() {
         </div>
 
         {/* Call to Action */}
+        
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8, duration: 0.5 }}
-          className="text-center bg-teal-600 text-white p-8 rounded-lg shadow-lg"
+          className="text-center bg-teal-600 text-white p-6 sm:p-8 rounded-lg shadow-lg"
         >
-          <h2 className="text-3xl font-bold mb-4">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4">
             Ready to Revolutionize Your PR Strategy?
           </h2>
-          <p className="mb-6 text-lg">
-            Let's create innovative, QR-powered campaigns that will set your brand apart and drive unprecedented engagement.
+          <p className="mb-6 text-base sm:text-lg">
+            Let&#39;s create innovative, QR-powered campaigns that will set your brand apart and drive unprecedented engagement.
           </p>
           <Button size="lg" variant="secondary" asChild>
             <a href="/contact">
