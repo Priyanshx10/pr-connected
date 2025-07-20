@@ -86,7 +86,7 @@ export default function Chatbot() {
   return (
     <>
       <motion.button
-        className="fixed bottom-4 right-4 bg-teal-500 text-white p-4 rounded-full shadow-lg"
+        className="fixed bottom-4 right-4 bg-blue-500 text-white p-4 rounded-full shadow-lg"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(true)}
@@ -102,7 +102,7 @@ export default function Chatbot() {
             exit={{ opacity: 0, y: 50 }}
             className="fixed bottom-20 right-4 w-80 bg-white rounded-lg shadow-xl overflow-hidden"
           >
-            <div className="bg-teal-500 text-white p-4 flex justify-between items-center">
+            <div className="bg-blue-500 text-white p-4 flex justify-between items-center">
               <h3 className="font-bold">PR-Connect Chat</h3>
               <button onClick={() => setIsOpen(false)}>
                 <X size={24} />
@@ -113,7 +113,7 @@ export default function Chatbot() {
                 <div
                   key={index}
                   className={`${
-                    message.isUser ? 'ml-auto bg-teal-100' : 'mr-auto bg-gray-100'
+                    message.isUser ? 'ml-auto bg-blue-100' : 'mr-auto bg-gray-100'
                   } p-2 rounded-lg max-w-[80%]`}
                 >
                   {message.text}
@@ -124,7 +124,7 @@ export default function Chatbot() {
               <div className="flex items-center space-x-2 mb-2">
                 <button
                   onClick={() => fileInputRef.current?.click()}
-                  className="p-2 text-teal-500 hover:bg-teal-100 rounded-full"
+                  className="p-2 text-blue-500 hover:bg-blue-100 rounded-full"
                   disabled={isUploading}
                 >
                   <Paperclip size={20} />
@@ -137,7 +137,7 @@ export default function Chatbot() {
                 />
                 <button
                   onClick={handleScheduleAppointment}
-                  className="p-2 text-teal-500 hover:bg-teal-100 rounded-full"
+                  className="p-2 text-blue-500 hover:bg-blue-100 rounded-full"
                 >
                   <Calendar size={20} />
                 </button>
@@ -149,11 +149,11 @@ export default function Chatbot() {
                   onChange={handleInputChange}
                   onKeyPress={handleKeyPress}
                   placeholder="Type your message..."
-                  className="flex-grow p-2 border rounded-l-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  className="flex-grow p-2 border rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <button
                   onClick={handleSend}
-                  className="bg-teal-500 text-white p-2 rounded-r-md"
+                  className="bg-blue-500 text-white p-2 rounded-r-md"
                 >
                   <Send size={20} />
                 </button>

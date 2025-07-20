@@ -4,246 +4,188 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { ArrowRight, ChevronLeft, ChevronRight, CheckCircle, QrCode, BarChart, Globe, Smartphone, Megaphone, Target } from 'lucide-react'
+import { ArrowRight, ChevronLeft, ChevronRight, Megaphone, Globe, BarChart, CheckCircle } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 const unsplashITImages = [
   'https://images.unsplash.com/photo-1573167243872-43c6433b9d40?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-  'https://images.unsplash.com/photo-1573166675921-076ea6b621ce?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-  'https://images.unsplash.com/photo-1484136199491-6603c473c88b?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-]
+].map(url => `${url}&t=${Date.now()}`)
 
-const services = [
-  { icon: QrCode, title: "QR Code Integration", description: "Seamlessly integrate QR codes into your marketing materials for instant engagement." },
-  { icon: BarChart, title: "Analytics & Reporting", description: "Get detailed insights into your campaign performance with our advanced analytics." },
-  { icon: Globe, title: "Digital PR Strategies", description: "Boost your online presence with our cutting-edge digital PR techniques." },
-  { icon: Smartphone, title: "Mobile-Optimized Campaigns", description: "Create campaigns that are perfectly tailored for mobile users." },
-  { icon: Megaphone, title: "Brand Amplification", description: "Amplify your brand's voice across multiple channels for maximum impact." },
-  { icon: Target, title: "Targeted Outreach", description: "Reach your ideal audience with precision-targeted PR campaigns." },
+const brandingServices = [
+  {
+    icon: Megaphone,
+    title: "Brand Amplification",
+    description: "360° brand visibility across digital and traditional channels",
+    features: [
+      "Social media dominance strategy",
+      "Influencer partnership programs", 
+      "Content syndication network"
+    ]
+  },
+  {
+    icon: Globe,
+    title: "Global Branding",
+    description: "Cultural adaptation for international markets",
+    features: [
+      "Market-specific messaging",
+      "Localization services",
+      "Cross-cultural PR"
+    ]
+  },
+  {
+    icon: BarChart,
+    title: "Performance Branding",
+    description: "Data-driven brand growth strategies",
+    features: [
+      "Brand lift measurement",
+      "Competitive benchmarking",
+      "ROI-focused campaigns"
+    ]
+  }
 ]
 
 export default function Home() {
   const [currentImage, setCurrentImage] = useState(0)
-  const [images, setImages] = useState(unsplashITImages)
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentImage((prevImage) => (prevImage + 1) % images.length)
-    }, 5000)
+      setCurrentImage(prev => (prev + 1) % unsplashITImages.length)
+    }, 8000)
     return () => clearInterval(timer)
-  }, [images])
-
-  useEffect(() => {
-    setImages(unsplashITImages.map(url => `${url}&t=${Date.now()}`))
   }, [])
 
-  const nextImage = () => {
-    setCurrentImage((prevImage) => (prevImage + 1) % images.length)
-  }
-
-  const prevImage = () => {
-    setCurrentImage((prevImage) => (prevImage - 1 + images.length) % images.length)
-  }
-
   return (
-    <div className='bg-white'>
+    <div className="bg-white">
       {/* Hero Section */}
-      <section className="relative h-[70vh] overflow-hidden">
-        {/* Image Slider */}
+      <section className="relative h-[80vh] min-h-[600px] overflow-hidden">
         <div className="absolute inset-0 z-0">
-          {images.map((img, index) => (
-            <motion.div
+          {unsplashITImages.map((img, index) => (
+            <Image
               key={index}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: index === currentImage ? 1 : 0 }}
-              transition={{ duration: 1 }}
-              className="absolute inset-0"
-            >
-              <Image src={img} alt={`IT Slide ${index + 1}`} layout="fill" objectFit="cover" />
-            </motion.div>
+              src={img}
+              alt={index === 0 ? "Brand amplification experts" : "Global marketing solutions"}
+              fill
+              priority={index < 2}
+              quality={index === currentImage ? 90 : 30}
+              className={`object-cover transition-opacity duration-1000 ${
+                index === currentImage ? 'opacity-100' : 'opacity-0'
+              }`}
+            />
           ))}
-          <div className="absolute inset-0 bg-black opacity-50"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
         </div>
 
-        {/* Content */}
-        <div className="relative z-10 h-full flex flex-col justify-center items-center text-white px-4">
+        <div className="relative z-10 h-full flex flex-col justify-center items-center px-4 text-center">
           <motion.h1
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="text-4xl md:text-5xl font-bold mb-4 text-center"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white [text-shadow:_0_2px_8px_rgba(0,0,0,0.5)]"
           >
-            Transform Your Brand with PR-Connect
+            <span className="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
+              Brand Dominance
+            </span><br />
+            Across Borders
           </motion.h1>
+          
           <motion.p
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-xl md:text-2xl mb-8 text-center max-w-2xl"
+            className="text-xl md:text-2xl mb-8 max-w-2xl text-blue-100"
           >
-            Innovative Marketing Solutions & QR Code Integration for the Digital Age
+            We amplify brands globally through strategic positioning, cultural adaptation, and measurable impact
           </motion.p>
+
           <motion.div
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
+            className="flex flex-col sm:flex-row gap-4"
           >
-            <Button asChild size="lg" className="bg-teal-500 hover:bg-teal-600">
+            <Button asChild size="lg" className="bg-white text-blue-800 hover:bg-gray-100 shadow-lg">
               <Link href="/contact">
-                Get Started
+                Amplify Your Brand Now
+              </Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="text-blue-800 border-white hover:bg-white/20">
+              <Link href="/success-stories">
+                Brand Transformations
               </Link>
             </Button>
           </motion.div>
         </div>
 
-        {/* Slider Controls */}
-        <button
-          onClick={prevImage}
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 p-2 rounded-full hover:bg-opacity-75 transition duration-300"
-        >
-          <ChevronLeft className="w-6 h-6 text-teal-600" />
-        </button>
-        <button
-          onClick={nextImage}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 p-2 rounded-full hover:bg-opacity-75 transition duration-300"
-        >
-          <ChevronRight className="w-6 h-6 text-teal-600" />
-        </button>
-      </section>
-
-      {/* Introduction Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-wrap items-center">
-            <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
-              <Image src="/images/team.jpg" alt="PR-Connect Team" width={500} height={300} className="rounded-lg shadow-lg" />
-            </div>
-            <div className="w-full lg:w-1/2 lg:pl-12">
-              <h2 className="text-3xl font-bold mb-4 text-gray-800">Welcome to PR-Connect</h2>
-              <p className="text-gray-600 mb-6">
-                At PR-Connect, we specialize in enhancing your online presence, automating your marketing with QR codes, and creating compelling content that resonates with your audience. Our unique blend of innovative strategies and cutting-edge technology helps your brand thrive in the digital landscape.
-              </p>
-              <Button asChild variant="outline">
-                <Link href="/about">
-                  Learn More About Us <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
-          </div>
+        <div className="absolute bottom-8 left-0 right-0 flex justify-center gap-6 text-sm text-white/80">
+          <span>50+ brands amplified</span>
+          <span>•</span>
+          <span>Avg. 1.2x brand lift</span>
+          <span>•</span>
+          <span>5+ markets covered</span>
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="py-20">
+      {/* Branding Amplification Section */}
+      <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">Our Services</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <Card key={index} className="transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold mb-4 text-gray-800">
+              <span className="text-blue-600">Brand Amplification</span> Framework
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Our proven methodology for building dominant brands in competitive markets
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {brandingServices.map((service, index) => (
+              <Card key={index} className="group transition-all hover:shadow-xl hover:-translate-y-2 h-full">
                 <CardHeader>
-                  <service.icon className="w-12 h-12 text-teal-500 mb-4" />
-                  <CardTitle>{service.title}</CardTitle>
+                  <div className="bg-blue-50 p-3 rounded-full w-fit mb-4">
+                    <service.icon className="w-8 h-8 text-blue-600" />
+                  </div>
+                  <CardTitle className="text-2xl">{service.title}</CardTitle>
+                  <p className="text-gray-600">{service.description}</p>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600">{service.description}</p>
+                  <ul className="space-y-3">
+                    {service.features.map((feature, i) => (
+                      <li key={i} className="flex items-start">
+                        <CheckCircle className="w-5 h-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </CardContent>
               </Card>
             ))}
           </div>
-          <div className="text-center mt-12">
-            <Button asChild>
-              <Link href="/services">
-                View All Services <ArrowRight className="ml-2 h-4 w-4" />
+        </div>
+      </section>
+
+      {/* Pricing CTA Section */}
+      <section className="bg-gradient-to-r from-blue-700 to-blue-900 py-20 text-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold mb-6">
+            Ready for <span className="text-blue-300">Brand Transformation</span>?
+          </h2>
+          <p className="text-xl mb-8 max-w-2xl mx-auto">
+            Explore our flexible pricing options tailored to your brand's growth stage
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <Button asChild size="lg" className="bg-white text-blue-800 hover:bg-gray-100 shadow-lg">
+              <Link href="/pricing">
+                View Pricing Plans
+              </Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="text-blue-800 border-white hover:bg-white/20">
+              <Link href="/contact">
+                Get Custom Quote
               </Link>
             </Button>
           </div>
-        </div>
-      </section>
-
-      {/* Why Choose Us Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold mb-12 text-center text-gray-800">Why Choose PR-Connect?</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card className="bg-white">
-              <CardHeader>
-                <CardTitle className="text-xl font-semibold text-teal-600">Innovative Approach</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2">
-                  <li className="flex items-center">
-                    <CheckCircle className="w-5 h-5 text-teal-500 mr-2" />
-                    <span>Cutting-edge QR code integration</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="w-5 h-5 text-teal-500 mr-2" />
-                    <span>Data-driven strategies</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="w-5 h-5 text-teal-500 mr-2" />
-                    <span>Continuous optimization</span>
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-            <Card className="bg-white">
-              <CardHeader>
-                <CardTitle className="text-xl font-semibold text-teal-600">Expert Team</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2">
-                  <li className="flex items-center">
-                    <CheckCircle className="w-5 h-5 text-teal-500 mr-2" />
-                    <span>Years of PR experience</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="w-5 h-5 text-teal-500 mr-2" />
-                    <span>Tech-savvy professionals</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="w-5 h-5 text-teal-500 mr-2" />
-                    <span>Cross-industry knowledge</span>
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-            <Card className="bg-white">
-              <CardHeader>
-                <CardTitle className="text-xl font-semibold text-teal-600">Proven Results</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2">
-                  <li className="flex items-center">
-                    <CheckCircle className="w-5 h-5 text-teal-500 mr-2" />
-                    <span>Measurable ROI</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="w-5 h-5 text-teal-500 mr-2" />
-                    <span>Increased brand engagement</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="w-5 h-5 text-teal-500 mr-2" />
-                    <span>Success across industries</span>
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="bg-teal-500 py-20">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-6 text-white">Ready to Transform Your PR Strategy?</h2>
-          <p className="text-xl mb-8 text-teal-100">Let&#39;s create a customized QR-powered campaign for your brand.</p>
-          <Button asChild size="lg" variant="secondary">
-            <Link href="/contact">
-              Contact Us <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
         </div>
       </section>
     </div>

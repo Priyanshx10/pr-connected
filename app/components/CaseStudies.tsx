@@ -2,71 +2,55 @@
 
 import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, ArrowLeft, CheckCircle, BarChart, Users, Zap } from 'lucide-react';
+import { ArrowRight, ArrowLeft, CheckCircle, BarChart, Users, Zap, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ScrollArea } from "@/components/ui/scroll-area"
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-const unsplashImages = [
-  "https://plus.unsplash.com/premium_photo-1682464708085-95b4486e2c32?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1725088819905-058e8dd6a6e5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzB8fEFJfGVufDB8fDB8fHww",
-  "https://images.unsplash.com/photo-1532178324009-6b6adeca1741?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDZ8fEFJfGVufDB8fDB8fHww"
+// Using common image paths that would exist in a Next.js project
+const defaultImages = [
+  'https://images.unsplash.com/photo-1573167243872-43c6433b9d40?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',  // Common placeholder image name
+  "/images/hero-background.jpg", // Typical hero image
+  "/images/cta-background.jpg"   // Common CTA background
 ];
 
 const caseStudies = [
   { 
-    title: "Tech Giant's QR Revolution", 
-    description: "How we helped a leading tech company increase engagement by 250% with QR-powered product packaging.", 
-    image: unsplashImages[0],
+    title: "Tech Company's Digital Transformation", 
+    description: "How we amplified brand visibility and drove 250% engagement growth", 
+    image: defaultImages[0],
     industry: "Technology",
-    results: ["250% increase in engagement", "45% boost in product registrations", "2M+ QR scans in first month"],
-    testimonial: "PR-Connect's QR strategy completely transformed how we interact with our customers. The results speak for themselves.",
-    challenge: "The tech giant was struggling to connect their physical products with their digital ecosystem, resulting in low customer engagement and missed opportunities for data collection.",
-    solution: "We implemented a comprehensive QR code strategy that seamlessly integrated their product packaging with their digital platforms. Each QR code led to a personalized digital experience based on the product and user data.",
-    implementation: [
-      "Designed visually appealing QR codes that blended with product packaging",
-      "Created a robust backend system to handle millions of scans and data points",
-      "Developed a series of engaging micro-sites tailored to each product line",
-      "Implemented real-time analytics to track user engagement and behavior"
+    results: [
+      "10% increase in digital engagement",
+      "25% boost in lead generation",
+      "2k+ new customer interactions"
     ],
-    longTermImpact: "The QR campaign not only boosted immediate engagement but also provided valuable data insights, allowing the company to refine their product offerings and marketing strategies. This led to a 20% increase in customer retention over the following year."
+    testimonial: "The PR-Connect team transformed our digital presence. Their innovative approach delivered measurable results that exceeded our expectations.",
+    author: "Sarah Chen, CMO at TechCorp",
+    challenge: "Struggling with low digital engagement and outdated marketing channels.",
+    solution: "Implemented an integrated digital PR strategy with measurable KPIs.",
+    implementation: [
+      "Comprehensive brand audit and positioning",
+      "Multi-channel digital campaign",
+      "Data-driven content strategy",
+      "Ongoing performance optimization"
+    ],
+    impact: "Established as market leader with 300% ROI on PR spend"
   },
   { 
-    title: "Retail Chain's In-Store Magic", 
-    description: "Our QR strategy transformed the in-store experience for a major retail chain, boosting sales by 30%.", 
-    image: unsplashImages[1],
+    title: "Retail Brand Expansion", 
+    description: "Omnichannel strategy that increased sales by 10%", 
+    image: defaultImages[1],
     industry: "Retail",
-    results: ["30% increase in sales", "50% higher customer satisfaction", "20% increase in repeat visits"],
-    testimonial: "The innovative QR campaign by PR-Connect brought our stores to life. Our customers love the interactive experience.",
-    challenge: "The retail chain was facing declining foot traffic and struggling to compete with online retailers. They needed a way to enhance the in-store experience and bridge the gap between physical and digital shopping.",
-    solution: "We created an immersive in-store QR experience that gamified shopping, provided instant product information, and offered personalized discounts.",
-    implementation: [
-      "Placed QR codes strategically throughout stores, on product displays, and even on price tags",
-      "Developed a mobile app that integrated with the QR system for a seamless customer experience",
-      "Implemented a points-based reward system for QR scans to encourage engagement",
-      "Created virtual try-on experiences for clothing and cosmetics using AR technology"
+    results: [
+      "10% sales growth",
+      "2x customer engagement",
+      "16% increase in repeat purchases"
     ],
-    longTermImpact: "The QR strategy not only boosted immediate sales but also significantly increased customer loyalty. The chain saw a 40% increase in their loyalty program sign-ups and a 25% increase in average customer lifetime value within 18 months of implementation."
-  },
-  { 
-    title: "Non-Profit's Donation Surge", 
-    description: "We helped a non-profit organization increase donations by 180% through an innovative QR campaign.", 
-    image: unsplashImages[2],
-    industry: "Non-Profit",
-    results: ["180% increase in donations", "300% growth in volunteer sign-ups", "1M+ social media impressions"],
-    testimonial: "PR-Connect's QR campaign not only boosted our donations but also significantly increased our visibility and volunteer base.",
-    challenge: "The non-profit was struggling to reach younger donors and volunteers. Their traditional fundraising methods were becoming less effective, and they needed a way to tell their story more engagingly.",
-    solution: "We developed a city-wide QR scavenger hunt that educated participants about the non-profit's mission while encouraging donations and volunteer sign-ups.",
-    implementation: [
-      "Placed QR codes at key locations around the city, each revealing a part of the non-profit's story",
-      "Created an interactive map and progress tracker for participants",
-      "Integrated one-click donation and volunteer sign-up options at each QR checkpoint",
-      "Leveraged social media sharing to amplify reach and engagement"
-    ],
-    longTermImpact: "The campaign's success extended beyond the initial donation surge. The non-profit saw a 70% increase in long-term recurring donations and a 150% increase in their social media following, providing a sustainable base for future campaigns."
+    testimonial: "Their strategic approach helped us dominate our market segment within 6 months.",
+    author: "Michael Rodriguez, CEO"
   }
 ];
 
@@ -82,34 +66,61 @@ export default function CaseStudies() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
-      <motion.section
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="container mx-auto px-4 py-8 sm:py-12 md:py-16 lg:py-20"
-      >
-        {/* Header */}
-        <motion.h1
-          initial={{ y: -50 }}
-          animate={{ y: 0 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-          className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 md:mb-8 text-center text-gray-800"
-        >
-          Case Studies
-        </motion.h1>
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      {/* Hero Section */}
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-900 to-purple-900 text-white">
+        <div className="max-w-7xl mx-auto text-center">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6"
+          >
+            Brand Amplification Success Stories
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-xl sm:text-2xl max-w-4xl mx-auto mb-8"
+          >
+            See how we've helped brands achieve remarkable growth
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <Button size="lg" className="bg-white text-blue-900 hover:bg-gray-100 font-bold">
+              Get Your Free Strategy Session
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </motion.div>
+        </div>
+      </section>
 
-        <motion.p
-          initial={{ y: 50 }}
-          animate={{ y: 0 }}
-          transition={{ delay: 0.4, duration: 0.5 }}
-          className="text-lg sm:text-xl mb-8 sm:mb-10 md:mb-12 text-center text-gray-600 max-w-3xl mx-auto"
+      {/* Case Studies Section */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="mb-16 text-center"
         >
-          Explore how we&apos;ve helped businesses achieve remarkable results through our innovative QR-powered PR strategies.
-        </motion.p>
+          <Badge variant="outline" className="mb-4 bg-blue-100 text-blue-800 border-blue-200">
+            Proven Results
+          </Badge>
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            Real Clients, Measurable Impact
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Our data-driven approach delivers tangible business outcomes
+          </p>
+        </motion.div>
 
         {/* Case Study Carousel */}
-        <div className="relative mb-12 sm:mb-16">
+        <div className="relative mb-20">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentStudy}
@@ -118,141 +129,102 @@ export default function CaseStudies() {
               exit={{ opacity: 0, x: -100 }}
               transition={{ duration: 0.5 }}
             >
-              <Card className="w-full max-w-4xl mx-auto">
-                <CardHeader>
-                  <CardTitle className="text-xl sm:text-2xl font-bold">{caseStudies[currentStudy].title}</CardTitle>
-                  <CardDescription>{caseStudies[currentStudy].description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid sm:grid-cols-2 gap-6 mb-6">
-                    <div>
-                      <Image
-                        src={caseStudies[currentStudy].image}
-                        alt={caseStudies[currentStudy].title}
-                        width={400}
-                        height={250}
-                        className="w-full h-48 object-cover rounded-lg"
-                      />
-                    </div>
-                    <div>
-                      <Badge className="mb-2">{caseStudies[currentStudy].industry}</Badge>
-                      <h4 className="text-lg font-semibold mb-2">Key Results:</h4>
-                      <ul className="list-disc pl-5 mb-4">
-                        {caseStudies[currentStudy].results.map((result, index) => (
-                          <li key={index}>{result}</li>
-                        ))}
-                      </ul>
-                      <blockquote className="italic border-l-4 border-teal-500 pl-4">
-                        &ldquo;{caseStudies[currentStudy].testimonial}&ldquo;
-                      </blockquote>
-                    </div>
+              <Card className="w-full max-w-5xl mx-auto overflow-hidden shadow-xl">
+                <div className="grid md:grid-cols-2 gap-0">
+                  <div className="relative h-64 md:h-full">
+                    <Image
+                      src={caseStudies[currentStudy].image}
+                      alt={caseStudies[currentStudy].title}
+                      fill
+                      className="object-cover"
+                      priority
+                    />
                   </div>
-                  <Tabs defaultValue="challenge" className="w-full">
-                    <ScrollArea className="w-full whitespace-nowrap rounded-md border">
-                      <TabsList>
-                        <TabsTrigger value="challenge">Challenge</TabsTrigger>
-                        <TabsTrigger value="solution">Solution</TabsTrigger>
-                        <TabsTrigger value="implementation">Implementation</TabsTrigger>
-                        <TabsTrigger value="impact">Long-Term Impact</TabsTrigger>
-                      </TabsList>
-                    </ScrollArea>
-                    <TabsContent value="challenge">
-                      <p>{caseStudies[currentStudy].challenge}</p>
-                    </TabsContent>
-                    <TabsContent value="solution">
-                      <p>{caseStudies[currentStudy].solution}</p>
-                    </TabsContent>
-                    <TabsContent value="implementation">
-                      <ul className="list-disc pl-5">
-                        {caseStudies[currentStudy].implementation.map((step, index) => (
-                          <li key={index}>{step}</li>
-                        ))}
-                      </ul>
-                    </TabsContent>
-                    <TabsContent value="impact">
-                      <p>{caseStudies[currentStudy].longTermImpact}</p>
-                    </TabsContent>
-                  </Tabs>
-                </CardContent>
-                <CardFooter className="justify-between">
-                  <Button variant="outline" onClick={prevStudy}>
-                    <ArrowLeft className="mr-2 h-4 w-4" /> Previous
-                  </Button>
-                  <Button variant="outline" onClick={nextStudy}>
-                    Next <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </CardFooter>
+                  <div>
+                    <CardHeader>
+                      <Badge className="mb-2 w-fit">{caseStudies[currentStudy].industry}</Badge>
+                      <CardTitle className="text-2xl font-bold">{caseStudies[currentStudy].title}</CardTitle>
+                      <CardDescription>{caseStudies[currentStudy].description}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="mb-6">
+                        <h4 className="font-semibold mb-3 flex items-center">
+                          <CheckCircle className="w-5 h-5 text-green-500 mr-2" />
+                          Key Results
+                        </h4>
+                        <ul className="space-y-2">
+                          {caseStudies[currentStudy].results.map((result, index) => (
+                            <li key={index} className="flex items-start">
+                              <span className="flex-shrink-0 w-1.5 h-1.5 mt-2.5 mr-2 bg-blue-500 rounded-full"></span>
+                              <span>{result}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <Tabs defaultValue="challenge" className="w-full">
+                        <TabsList className="grid w-full grid-cols-4">
+                          <TabsTrigger value="challenge">Challenge</TabsTrigger>
+                          <TabsTrigger value="solution">Solution</TabsTrigger>
+                          <TabsTrigger value="implementation">Approach</TabsTrigger>
+                          <TabsTrigger value="impact">Impact</TabsTrigger>
+                        </TabsList>
+                        <TabsContent value="challenge" className="pt-4">
+                          <p>{caseStudies[currentStudy].challenge}</p>
+                        </TabsContent>
+                        <TabsContent value="solution" className="pt-4">
+                          <p>{caseStudies[currentStudy].solution}</p>
+                        </TabsContent>
+                        <TabsContent value="implementation" className="pt-4">
+                          <ul className="space-y-3">
+                            {caseStudies[currentStudy].implementation?.map((step, index) => (
+                              <li key={index} className="flex">
+                                <span className="flex-shrink-0 mt-1 mr-3">
+                                  <ChevronRight className="w-4 h-4 text-blue-500" />
+                                </span>
+                                <span>{step}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </TabsContent>
+                        <TabsContent value="impact" className="pt-4">
+                          <p>{caseStudies[currentStudy].impact}</p>
+                        </TabsContent>
+                      </Tabs>
+                    </CardContent>
+                    <CardFooter className="flex justify-between border-t pt-4">
+                      <Button variant="outline" onClick={prevStudy}>
+                        <ArrowLeft className="mr-2 h-4 w-4" /> Previous
+                      </Button>
+                      <Button variant="outline" onClick={nextStudy}>
+                        Next <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </CardFooter>
+                  </div>
+                </div>
               </Card>
             </motion.div>
           </AnimatePresence>
         </div>
 
-        {/* Our Approach Section */}
-        <div className="mb-12 sm:mb-16">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center text-gray-800">Our Approach</h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-            {[
-              { icon: CheckCircle, title: "Tailored Strategies", description: "We craft unique QR campaigns that align perfectly with your brand and objectives." },
-              { icon: BarChart, title: "Data-Driven Decisions", description: "Our strategies are backed by robust analytics and real-time data insights." },
-              { icon: Users, title: "User-Centric Design", description: "We prioritize user experience to ensure maximum engagement and conversion." },
-              { icon: Zap, title: "Rapid Implementation", description: "Our agile approach allows for quick deployment and iterative improvements." }
-            ].map((item, index) => (
-              <Card key={index} className="text-center">
-                <CardHeader>
-                  <item.icon className="w-10 h-10 sm:w-12 sm:h-12 mx-auto text-teal-500 mb-4" />
-                  <CardTitle className="text-lg sm:text-xl">{item.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm sm:text-base">{item.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-
-        {/* FAQ Section */}
-        <div className="mb-12 sm:mb-16">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center text-gray-800">Frequently Asked Questions</h2>
-          <div className="space-y-4">
-            {[
-              { question: "How long does it typically take to see results from a QR campaign?", answer: "While results can vary, many of our clients see significant engagement within the first month of launching a campaign. Long-term benefits often become apparent within 3-6 months." },
-              { question: "Can QR strategies work for any industry?", answer: "Yes! We've successfully implemented QR campaigns across various industries, from tech and retail to non-profits and healthcare. The key is in tailoring the strategy to your specific audience and goals." },
-              { question: "How do you measure the success of a QR campaign?", answer: "We use a combination of metrics including scan rates, engagement time, conversion rates, and ROI. We also consider qualitative feedback and long-term impact on brand perception and customer loyalty." },
-              { question: "What makes your QR strategies different from others?", answer: "Our approach goes beyond just generating QR codes. We create comprehensive, data-driven strategies that integrate seamlessly with your overall marketing and PR efforts, ensuring maximum impact and long-term value." }
-            ].map((item, index) => (
-              <Card key={index}>
-                <CardHeader>
-                  <CardTitle className="text-base sm:text-lg">{item.question}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm sm:text-base">{item.answer}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-
-        {/* Call to Action */}
-        
+        {/* CTA Section */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8, duration: 0.5 }}
-          className="text-center bg-teal-600 text-white p-6 sm:p-8 rounded-lg shadow-lg"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-8 sm:p-12 text-white text-center"
         >
-          <h2 className="text-2xl sm:text-3xl font-bold mb-4">
-            Ready to Revolutionize Your PR Strategy?
-          </h2>
-          <p className="mb-6 text-base sm:text-lg">
-            Let&#39;s create innovative, QR-powered campaigns that will set your brand apart and drive unprecedented engagement.
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4">Ready to Amplify Your Brand?</h2>
+          <p className="text-lg sm:text-xl mb-6 max-w-2xl mx-auto">
+            Let's discuss how we can create a custom PR strategy for you.
           </p>
-          <Button size="lg" variant="secondary" asChild>
-            <a href="/contact">
-              Get Started Today <ArrowRight className="ml-2 h-4 w-4" />
-            </a>
+          <Button size="lg" variant="secondary" className="font-bold">
+            Schedule Free Consultation
+            <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </motion.div>
-      </motion.section>
+      </section>
     </div>
   );
 }

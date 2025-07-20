@@ -72,7 +72,7 @@ const reasons = [
 export default function WhyPR() {
   return (
     <div className="min-h-screen bg-white">
-      <section className="py-20 bg-gradient-to-r from-teal-500 to-teal-500 text-white">
+      <section className="py-20 bg-gradient-to-r from-blue-500 to-blue-500 text-white">
         <div className="container mx-auto px-6 text-center">
           <h1 className="text-4xl font-bold mb-4">Why Choose PR Connected?</h1>
           <p className="text-xl mb-8">Transforming your brand through strategic PR solutions</p>
@@ -90,7 +90,7 @@ export default function WhyPR() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <div className="md:flex">
-              <div className="md:flex-shrink-0 flex items-center justify-center bg-teal-500 text-white p-6 w-full md:w-1/4">
+              <div className="md:flex-shrink-0 flex items-center justify-center bg-blue-500 text-white p-6 w-full md:w-1/4">
                 <h2 className="text-xl font-semibold text-center">{reason.title}</h2>
               </div>
                 <div className="p-8">
@@ -104,7 +104,7 @@ export default function WhyPR() {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.3, delay: (index * 0.1) + (detailIndex * 0.1) }}
                       >
-                        <ArrowRight className="h-4 w-4 mr-2 text-teal-500" />
+                        <ArrowRight className="h-4 w-4 mr-2 text-blue-500" />
                         {detail}
                       </motion.li>
                     ))}

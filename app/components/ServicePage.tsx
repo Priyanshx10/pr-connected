@@ -1,126 +1,212 @@
 'use client'
 
 import { useState } from 'react'
-import { CheckCircle2, ArrowRight, QrCode, BarChart2, Megaphone, Smartphone, Zap, Target } from 'lucide-react'
+import { CheckCircle2, ArrowRight, Globe, Zap, LayoutTemplate, BarChart2, Rocket, TrendingUp } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 
-const tabsData = [
-  { id: "qr-code", label: "QR Code Integration", icon: QrCode, 
-    description: "Seamlessly integrate QR codes into your marketing materials for instant engagement.",
-    features: [
-      "Custom QR code design that aligns with your brand",
-      "Dynamic QR codes for real-time content updates",
-      "Analytics integration for tracking scan rates and user behavior",
-      "Multi-channel campaign integration (print, digital, outdoor)"
+// Laser-focused on website services and brand amplification
+const services = [
+  { 
+    id: "web-design", 
+    label: "Website Design", 
+    icon: LayoutTemplate,
+    description: "High-converting websites that attract and retain customers",
+    highlights: [
+      "Mobile-first responsive design",
+      "90+ PageSpeed scores guaranteed",
+      "SEO-optimized architecture",
+      "Conversion-focused UX"
     ],
-    caseStudy: "Increased engagement by 250% for a retail client"
+    results: [
+      "E-commerce site: 10% conversion increase",
+      "Service business: 30% more leads"
+    ],
+    price: "From $1,500"
   },
-  { id: "analytics", label: "Analytics & Reporting", icon: BarChart2,
-    description: "Gain deep insights into your marketing performance with comprehensive analytics.",
-    features: [
-      "Real-time dashboard with key performance indicators",
-      "Custom report generation for stakeholders",
-      "Advanced data visualization tools",
-      "Integration with major analytics platforms"
+  { 
+    id: "brand-growth", 
+    label: "Brand Amplification", 
+    icon: Zap,
+    description: "360° brand visibility across all digital channels",
+    highlights: [
+      "Social media dominance strategy",
+      "New Logo Design",
+      "Content syndication network",
+      "Co-branding opportunities"
     ],
-    caseStudy: "Improved ROI by 180% for an e-commerce brand"
+    results: [
+      "CPG brand: 40% reach expansion",
+      "B2B service: 3x lead quality"
+    ],
+    price: "From $2,500/mo"
   },
-  { id: "digital-pr", label: "Digital PR Strategies", icon: Megaphone,
-    description: "Boost your online presence and reputation with targeted digital PR campaigns.",
-    features: [
-      "Influencer partnership management",
-      "Press release distribution and tracking",
-      "Social media crisis management",
-      "Online reputation monitoring and improvement"
+  { 
+    id: "global-seo", 
+    label: "Global SEO", 
+    icon: Globe,
+    description: "Dominate search results in your target markets",
+    highlights: [
+      "Multi-language optimization",
+      "Local search domination",
+      "Enterprise SEO architecture",
+      "Competitor displacement"
     ],
-    caseStudy: "Achieved 500% increase in positive brand mentions for a tech startup"
+    results: [
+      "SaaS company: 20% organic traffic",
+      "Brand: #1 rankings in 3 countries"
+    ],
+    price: "From $4,500/mo"
   },
-  { id: "mobile", label: "Mobile-Optimized Campaigns", icon: Smartphone,
-    description: "Create engaging mobile-first marketing campaigns that resonate with on-the-go audiences.",
-    features: [
-      "Responsive design for all mobile devices",
-      "App-based marketing integration",
-      "SMS and push notification campaigns",
-      "Location-based targeting and geofencing"
+  { 
+    id: "performance", 
+    label: "Performance Marketing", 
+    icon: Rocket,
+    description: "Data-driven campaigns that deliver measurable ROI",
+    highlights: [
+      "Meta/Google/TikTok advertising",
+      "Retargeting automation",
+      "Conversion rate optimization",
+      "ROI tracking dashboard"
     ],
-    caseStudy: "Drove 300% increase in mobile conversions for a travel app"
-  },
-  { id: "brand", label: "Brand Amplification", icon: Zap,
-    description: "Elevate your brand presence and reach new heights with strategic amplification tactics.",
-    features: [
-      "Cross-platform brand consistency",
-      "User-generated content campaigns",
-      "Brand storytelling and narrative development",
-      "Partnerships and co-branding opportunities"
+    results: [
+      "DTC brand: 5.8x ROAS",
+      "App: $0.23 cost per install"
     ],
-    caseStudy: "Expanded brand reach by 400% for a CPG company"
-  },
-  { id: "outreach", label: "Targeted Outreach", icon: Target,
-    description: "Connect with your ideal audience through precision-targeted outreach campaigns.",
-    features: [
-      "Audience segmentation and persona development",
-      "Multi-channel outreach automation",
-      "Personalized content delivery",
-      "A/B testing for outreach optimization"
-    ],
-    caseStudy: "Increased qualified leads by 200% for a B2B SaaS company"
+    price: "From $2,500/mo + ad spend"
   }
 ]
 
-export default function Component() {
-  const [activeTab, setActiveTab] = useState(tabsData[0].id)
+export default function ServicesShowcase() {
+  const [activeTab, setActiveTab] = useState(services[0].id)
 
   return (
-    <Card className="w-full max-w-4xl mx-auto shadow-lg">
-      <CardHeader>
-        <CardTitle className="text-2xl font-bold">Marketing Dashboard</CardTitle>
-        <CardDescription>Explore our comprehensive marketing solutions</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <ScrollArea className="w-full whitespace-nowrap rounded-md border">
-            <TabsList className="w-full justify-start">
-              {tabsData.map((tab) => (
-                <TabsTrigger key={tab.id} value={tab.id} className="flex items-center gap-2">
-                  <tab.icon className="h-4 w-4" />
-                  <span className="hidden sm:inline">{tab.label}</span>
-                </TabsTrigger>
-              ))}
-            </TabsList>
-          </ScrollArea>
-          {tabsData.map((tab) => (
-            <TabsContent key={tab.id} value={tab.id} className="mt-6">
-              <div className="space-y-4">
-                <h2 className="text-2xl font-bold">{tab.label}</h2>
-                <p className="text-muted-foreground">{tab.description}</p>
-                <h3 className="text-xl font-semibold">Key Features:</h3>
-                <ul className="space-y-3">
-                  {tab.features.map((feature, index) => (
-                    <li key={index} className="flex items-start">
-                      <CheckCircle2 className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Card className="bg-muted">
-                  <CardHeader>
-                    <CardTitle className="text-lg">Case Study Highlight:</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="italic">{tab.caseStudy}</p>
-                  </CardContent>
-                </Card>
-                <Button className="w-full sm:w-auto">
-                  Learn More <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </div>
-            </TabsContent>
-          ))}
-        </Tabs>
-      </CardContent>
-    </Card>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="text-center mb-12">
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          Website & Brand Growth Services
+        </h1>
+        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          We build high-performing websites and amplify brands for businesses scaling globally
+        </p>
+      </div>
+
+      <Card className="shadow-2xl border-0">
+        <CardHeader className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-8">
+          <CardTitle className="text-3xl font-bold">Our Solutions</CardTitle>
+          <CardDescription className="text-indigo-100">
+            Tailored packages for established brands and fast-growing startups
+          </CardDescription>
+        </CardHeader>
+
+        <CardContent className="p-0">
+          <Tabs 
+            value={activeTab} 
+            onValueChange={setActiveTab}
+            className="w-full"
+          >
+            <ScrollArea className="w-full whitespace-nowrap border-b">
+              <TabsList className="w-auto h-auto p-2 bg-white">
+                {services.map((service) => (
+                  <TabsTrigger
+                    key={service.id}
+                    value={service.id}
+                    className="data-[state=active]:bg-indigo-50 data-[state=active]:text-indigo-600 data-[state=active]:shadow-sm px-6 py-3 rounded-lg flex items-center gap-2 transition-all"
+                  >
+                    <service.icon className="h-5 w-5" />
+                    <span className="font-medium">{service.label}</span>
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </ScrollArea>
+
+            {services.map((service) => (
+              <TabsContent 
+                key={service.id} 
+                value={service.id} 
+                className="p-8"
+              >
+                <div className="grid md:grid-cols-2 gap-12">
+                  <div>
+                    <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                      {service.label}
+                    </h2>
+                    <p className="text-lg text-gray-600 mb-6">
+                      {service.description}
+                    </p>
+
+                    <div className="mb-8">
+                      <h3 className="text-xl font-semibold mb-4 text-gray-900">
+                        What's Included
+                      </h3>
+                      <ul className="space-y-4">
+                        {service.highlights.map((highlight, index) => (
+                          <li key={index} className="flex items-start">
+                            <CheckCircle2 className="h-6 w-6 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
+                            <span className="text-gray-700">{highlight}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="bg-indigo-50 p-6 rounded-lg">
+                      <h3 className="text-lg font-semibold mb-3 text-indigo-800">
+                        Pricing
+                      </h3>
+                      <p className="text-2xl font-bold text-gray-900 mb-4">
+                        {service.price}
+                      </p>
+                      <Button className="w-full bg-indigo-600 hover:bg-indigo-700 h-12 text-lg">
+                        Get Started <ArrowRight className="ml-2 h-5 w-5" />
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                      <h3 className="text-xl font-semibold mb-4 text-gray-900">
+                          Client Results
+                      </h3>
+                      <ul className="space-y-4">
+                        {service.results.map((result, index) => (
+                          <li key={index} className="flex items-start">
+                            <div className="flex items-center justify-center w-8 h-8 bg-indigo-100 text-indigo-800 rounded-full mr-3 font-bold">
+                              {index + 1}
+                            </div>
+                            <span className="text-gray-700">{result}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="mt-6 bg-gradient-to-r from-indigo-50 to-purple-50 p-6 rounded-xl border border-gray-200">
+                      <h3 className="text-xl font-semibold mb-4 text-gray-900">
+                        Why Choose Us
+                      </h3>
+                      <ul className="space-y-3">
+                        <li className="flex items-start">
+                          <TrendingUp className="h-5 w-5 text-indigo-600 mr-2 mt-0.5" />
+                          <span>Proven track record with 50+ brands</span>
+                        </li>
+                        <li className="flex items-start">
+                          <BarChart2 className="h-5 w-5 text-indigo-600 mr-2 mt-0.5" />
+                          <span>Data-driven approach with clear metrics</span>
+                        </li>
+                        <li className="flex items-start">
+                          <Globe className="h-5 w-5 text-indigo-600 mr-2 mt-0.5" />
+                          <span>Global expertise across 5 markets</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </TabsContent>
+            ))}
+          </Tabs>
+        </CardContent>
+      </Card>
+    </div>
   )
 }

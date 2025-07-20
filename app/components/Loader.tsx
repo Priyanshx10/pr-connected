@@ -25,7 +25,7 @@ const StatisticalLoader = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 flex items-center justify-center bg-teal-500 z-50"
+      className="fixed inset-0 flex items-center justify-center bg-blue-500 z-50"
     >
       <div className="text-center">
         <motion.div
