@@ -1,1 +1,2 @@
 {"email":"saw@gmail.com","level":"info","message":"New contact form submission","name":"Sam","service":"pr-connect"}
+{"error":{"code":"ENOTFOUND","hostname":"_mongodb._tcp.cluster0.maukh.mongodb.net","syscall":"querySrv"},"level":"error","message":"Error processing contact form","service":"pr-connect"}

@@ -2,125 +2,203 @@
 
 import { useState } from 'react'
 import { CheckCircle2, ArrowRight, QrCode, BarChart2, Megaphone, Smartphone, Zap, Target } from 'lucide-react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Button } from "@/components/ui/button"
-import { ScrollArea } from "@/components/ui/scroll-area"
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
+import { motion, AnimatePresence } from 'framer-motion'
 
-const tabsData = [
-  { id: "qr-code", label: "QR Code Integration", icon: QrCode, 
-    description: "Seamlessly integrate QR codes into your marketing materials for instant engagement.",
+// --- Real, business-focused value — no stock jargon, no fluff.
+// Replace placeholders with your actual client results.
+const services = [
+  {
+    id: 'qr-code',
+    label: 'QR Code Integration',
+    icon: QrCode,
+    description: 'Seamlessly integrate QR codes into your marketing for instant engagement and real-time updates.',
     features: [
-      "Custom QR code design that aligns with your brand",
-      "Dynamic QR codes for real-time content updates",
-      "Analytics integration for tracking scan rates and user behavior",
-      "Multi-channel campaign integration (print, digital, outdoor)"
+      'Custom QR design—matches your brand, not generic',
+      'Dynamic QR codes for instant content updates',
+      'Track scans, user behavior, and campaign impact',
+      'Works on menus, posters, packaging, and more'
     ],
-    caseStudy: "Increased engagement by 250% for a retail client"
+    caseStudy: 'Retail client boosted engagement by 250% in 3 months'
   },
-  { id: "analytics", label: "Analytics & Reporting", icon: BarChart2,
-    description: "Gain deep insights into your marketing performance with comprehensive analytics.",
+  {
+    id: 'analytics',
+    label: 'Analytics & Reporting',
+    icon: BarChart2,
+    description: 'Clear, actionable insights into every campaign—see what works, refine what doesn’t.',
     features: [
-      "Real-time dashboard with key performance indicators",
-      "Custom report generation for stakeholders",
-      "Advanced data visualization tools",
-      "Integration with major analytics platforms"
+      'Live dashboard: bookings, leads, sales, traffic',
+      'Monthly, weekly, or real-time reports',
+      'Export to PDF, Excel, or Google Sheets',
+      'Secure, GDPR-compliant data'
     ],
-    caseStudy: "Improved ROI by 180% for an e-commerce brand"
+    caseStudy: 'E-commerce brand increased ROI by 180% in 6 months'
   },
-  { id: "digital-pr", label: "Digital PR Strategies", icon: Megaphone,
-    description: "Boost your online presence and reputation with targeted digital PR campaigns.",
+  {
+    id: 'digital-pr',
+    label: 'Digital PR Strategies',
+    icon: Megaphone,
+    description: 'Build your reputation, attract media, and amplify your message across the web.',
     features: [
-      "Influencer partnership management",
-      "Press release distribution and tracking",
-      "Social media crisis management",
-      "Online reputation monitoring and improvement"
+      'Local and national press outreach',
+      'Crisis management (before you need it)',
+      'Google News, Apple News, and social syndication',
+      'Clear metrics: reach, engagement, sentiment'
     ],
-    caseStudy: "Achieved 500% increase in positive brand mentions for a tech startup"
+    caseStudy: 'Tech startup grew positive mentions by 500% in 4 months'
   },
-  { id: "mobile", label: "Mobile-Optimized Campaigns", icon: Smartphone,
-    description: "Create engaging mobile-first marketing campaigns that resonate with on-the-go audiences.",
+  {
+    id: 'mobile',
+    label: 'Mobile Campaigns',
+    icon: Smartphone,
+    description: 'Reach customers where they are—on phones, tablets, and apps.',
     features: [
-      "Responsive design for all mobile devices",
-      "App-based marketing integration",
-      "SMS and push notification campaigns",
-      "Location-based targeting and geofencing"
+      'One-click reservations, orders, or bookings',
+      'SMS/WhatsApp loyalty and promotions',
+      'App store optimization (ASO)',
+      'Geo-targeted offers and push notifications'
     ],
-    caseStudy: "Drove 300% increase in mobile conversions for a travel app"
+    caseStudy: 'Travel app tripled mobile conversions in 8 weeks'
   },
-  { id: "brand", label: "Brand Amplification", icon: Zap,
-    description: "Elevate your brand presence and reach new heights with strategic amplification tactics.",
+  {
+    id: 'brand',
+    label: 'Brand Amplification',
+    icon: Zap,
+    description: 'Make your café, gym, or startup the go-to destination in your city.',
     features: [
-      "Cross-platform brand consistency",
-      "User-generated content campaigns",
-      "Brand storytelling and narrative development",
-      "Partnerships and co-branding opportunities"
+      'Logo, colors, fonts—unified across all channels',
+      'Customer stories, reviews, and testimonials',
+      'Instagram, TikTok, YouTube content plans',
+      'Partnerships with local influencers and businesses'
     ],
-    caseStudy: "Expanded brand reach by 400% for a CPG company"
+    caseStudy: 'Local café chain expanded reach by 400% in a year'
   },
-  { id: "outreach", label: "Targeted Outreach", icon: Target,
-    description: "Connect with your ideal audience through precision-targeted outreach campaigns.",
+  {
+    id: 'outreach',
+    label: 'Targeted Outreach',
+    icon: Target,
+    description: 'Connect with your ideal audience through precision-targeted outreach campaigns.',
     features: [
-      "Audience segmentation and persona development",
-      "Multi-channel outreach automation",
-      "Personalized content delivery",
-      "A/B testing for outreach optimization"
+      'Local SEO, Google Maps, and directory listings',
+      'Email and SMS nurturing campaigns',
+      'Retargeting ads (Facebook, Instagram, Google)',
+      'A/B testing for headlines, images, offers'
     ],
-    caseStudy: "Increased qualified leads by 200% for a B2B SaaS company"
+    caseStudy: 'B2B SaaS doubled qualified leads in 12 weeks'
   }
 ]
 
-export default function Component() {
-  const [activeTab, setActiveTab] = useState(tabsData[0].id)
+export default function Services() {
+  const [activeService, setActiveService] = useState(0)
 
   return (
-    <Card className="w-full max-w-4xl mx-auto shadow-lg">
-      <CardHeader>
-        <CardTitle className="text-2xl font-bold">Marketing Dashboard</CardTitle>
-        <CardDescription>Explore our comprehensive marketing solutions</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <ScrollArea className="w-full whitespace-nowrap rounded-md border">
-            <TabsList className="w-full justify-start">
-              {tabsData.map((tab) => (
-                <TabsTrigger key={tab.id} value={tab.id} className="flex items-center gap-2">
-                  <tab.icon className="h-4 w-4" />
-                  <span className="hidden sm:inline">{tab.label}</span>
-                </TabsTrigger>
-              ))}
-            </TabsList>
-          </ScrollArea>
-          {tabsData.map((tab) => (
-            <TabsContent key={tab.id} value={tab.id} className="mt-6">
-              <div className="space-y-4">
-                <h2 className="text-2xl font-bold">{tab.label}</h2>
-                <p className="text-muted-foreground">{tab.description}</p>
-                <h3 className="text-xl font-semibold">Key Features:</h3>
-                <ul className="space-y-3">
-                  {tab.features.map((feature, index) => (
-                    <li key={index} className="flex items-start">
-                      <CheckCircle2 className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Card className="bg-muted">
-                  <CardHeader>
-                    <CardTitle className="text-lg">Case Study Highlight:</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="italic">{tab.caseStudy}</p>
-                  </CardContent>
-                </Card>
-                <Button className="w-full sm:w-auto">
-                  Learn More <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </div>
-            </TabsContent>
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-6 sm:py-10 px-4 sm:px-6">
+      <div className="max-w-6xl mx-auto">
+        {/* Mobile/Tablet: Horizontal scrollable nav */}
+        <nav className="flex md:hidden gap-3 mb-8 pb-2 -mx-4 px-4 overflow-x-auto scrolling-touch">
+          {services.map((item, idx) => (
+            <button
+              key={item.id}
+              onClick={() => setActiveService(idx)}
+              className={`min-w-fit shrink-0 rounded-lg px-4 py-3 border-2 flex items-center gap-2 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-300
+                ${
+                  activeService === idx
+                    ? 'bg-blue-700 text-white border-blue-700 shadow-md'
+                    : 'bg-white text-blue-900 border-blue-200 hover:bg-blue-100'
+                }`}
+              aria-current={activeService === idx}
+            >
+              <item.icon className="w-5 h-5 flex-shrink-0" />
+              <span className="font-medium text-sm whitespace-nowrap">{item.label}</span>
+            </button>
           ))}
-        </Tabs>
-      </CardContent>
-    </Card>
+        </nav>
+
+        <div className="flex flex-col md:flex-row gap-6 xl:gap-8 w-full">
+          {/* Desktop: Vertical, sticky nav */}
+          <nav className="hidden md:flex flex-col gap-3 w-full md:w-60 lg:w-72 xl:w-80 sticky top-28 self-start min-h-0">
+            {services.map((item, idx) => (
+              <button
+                key={item.id}
+                onClick={() => setActiveService(idx)}
+                className={`rounded-lg px-4 py-3 border-2 flex items-center gap-3 transition-colors text-left focus:outline-none focus:ring-2 focus:ring-blue-300
+                  ${
+                    activeService === idx
+                      ? 'bg-blue-700 text-white border-blue-700 shadow-md'
+                      : 'bg-white text-blue-900 border-blue-200 hover:bg-blue-100'
+                  }`}
+                aria-current={activeService === idx}
+              >
+                <item.icon className="w-5 h-5 flex-shrink-0" />
+                <span className="font-medium text-sm">{item.label}</span>
+              </button>
+            ))}
+          </nav>
+
+          {/* Main content */}
+          <div className="flex-1">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={services[activeService].id}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+                className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 flex flex-col justify-between h-full"
+              >
+                <div>
+                  <div className="flex items-center gap-4 mb-5">
+                    <div className="rounded-full p-3 bg-blue-100 flex-shrink-0">
+                      {(() => {
+                        const Icon = services[activeService].icon
+                        return <Icon className="w-8 h-8 text-blue-600" />
+                      })()}
+                    </div>
+                    <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-blue-800 break-words">
+                      {services[activeService].label}
+                    </h1>
+                  </div>
+                  <p className="text-lg text-slate-700 mb-6">
+                    {services[activeService].description}
+                  </p>
+                  <div className="mb-6">
+                    <h2 className="text-lg font-semibold mb-3 text-blue-700">Key Features</h2>
+                    <ul className="space-y-3">
+                      {services[activeService].features.map((feature, i) => (
+                        <li key={i} className="flex">
+                          <CheckCircle2 className="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" />
+                          <span className="text-slate-800">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <Card className="bg-blue-50 border border-blue-100 rounded-xl mt-6">
+                    <CardHeader>
+                      <CardTitle className="text-lg font-semibold text-blue-800">Results</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="italic text-blue-900">{services[activeService].caseStudy}</p>
+                    </CardContent>
+                  </Card>
+                </div>
+                <div className="mt-8 w-full flex justify-end">
+                  <Button
+                    asChild
+                    size="lg"
+                    className="bg-blue-700 hover:bg-blue-800 text-white font-semibold shadow-lg w-full sm:w-auto"
+                  >
+                    <Link href="/contact">
+                      Get Started <ArrowRight className="ml-2 w-5 h-5" />
+                    </Link>
+                  </Button>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }

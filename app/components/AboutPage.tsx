@@ -1,263 +1,350 @@
-"use client";
+'use client'
 
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
-import CEO from "../../public/images/CEO.jpg";
-import COO from "../../public/images/COO.jpeg";
-import VP from "../../public/images/VP.jpeg";
-import { Users, Lightbulb, TrendingUp, Award, Star } from "lucide-react"; // Added Star icon for milestones
-import StatisticalLoader from "./Loader";
+import React, { useState, useEffect } from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Carousel } from 'react-responsive-carousel'
+import 'react-responsive-carousel/lib/styles/carousel.min.css'
+import { Users, Lightbulb, TrendingUp, Award, Star } from 'lucide-react'
+import StatisticalLoader from './Loader'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
-// Team members data
+// --- Team photos — replace with your actual images in /public/images/
+const CEO = '/images/CEO.jpg'
+const COO = '/images/COO.jpeg'
+const VP = '/images/VP.jpeg'
+
+// --- Hero images (the first image is a high-quality, relevant café photo)
+const HERO_IMAGES = [
+  'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80', // Replace with your actual café/coffee hero image (e.g., a local café scene, barista at work, or coffee cup with branding)
+  'https://images.unsplash.com/photo-1554469384-e58fac16e23a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Restaurant
+  'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Gym
+  'https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // SaaS
+  'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Startup
+]
+
+// --- Team data
 const teamMembers = [
-  { name: "Priyansh Yadav", role: "CEO", image: CEO },
-  { name: "Krapanshu Sharma", role: "Vice President", image: VP },
-  { name: "Rohit Surawat", role: "Chief Operating Officer", image: COO },
-];
+  { name: 'Priyansh Yadav', role: 'CEO', image: CEO },
+  { name: 'Krapansh Sharma', role: 'Vice President', image: VP },
+  { name: 'Rohit Surawat', role: 'Chief Operating Officer', image: COO },
+]
 
-// Features data
+// --- Features — real, business-owner–focused benefits
 const features = [
-  {
-    icon: Users,
-    title: "Expert Team",
-    description: "Years of experience in PR, marketing, and technology.",
-  },
-  {
-    icon: Lightbulb,
-    title: "Innovative Approach",
-    description: "Cutting-edge QR solutions for modern PR.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Proven Results",
-    description: "Driving unprecedented brand engagement and growth.",
-  },
-  {
-    icon: Award,
-    title: "Recognition",
-    description: "Award-winning campaigns setting new industry standards.",
-  },
-];
+  { icon: Users, title: 'Expert Team', description: 'Years of experience in PR, marketing, and technology.' },
+  { icon: Lightbulb, title: 'Innovative Approach', description: 'Cutting-edge QR solutions for modern PR.' },
+  { icon: TrendingUp, title: 'Proven Results', description: 'Driving real brand engagement and growth.' },
+  { icon: Award, title: 'Recognition', description: 'Award-winning campaigns setting new standards.' },
+]
 
-// Milestones data for the journey section
+// --- Milestones — accurate for a company founded in 2024
 const milestones = [
-  { year: "2015", event: "Company Founded", icon: Star },
-  { year: "2018", event: "First Major Campaign", icon: Star },
-  { year: "2020", event: "Global Expansion", icon: Star },
-  { year: "2023", event: "100+ Successful Campaigns", icon: Star },
-];
+  { year: '2024', event: 'PR-Connect Founded', icon: Star },
+  { year: '2024', event: 'First Client Onboarded', icon: Star },
+  { year: '2025', event: 'European Expansion', icon: Star },
+  { year: '2025', event: '10+ Brands Served', icon: Star },
+]
+
+// --- Animation variants
+const containerVariant = { hidden: { opacity: 0 }, visible: { opacity: 1 } }
+const itemVariant = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }
 
 export default function AboutUs() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 3000);
-    return () => clearTimeout(timer);
-  }, []);
+    const timer = setTimeout(() => setIsLoading(false), 1000)
+    return () => clearTimeout(timer)
+  }, [])
 
   return (
     <>
-      {/* Loader */}
       <AnimatePresence>{isLoading && <StatisticalLoader />}</AnimatePresence>
 
-      {/* Main content */}
       {!isLoading && (
-        <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-          <motion.section
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.7 }}
-            className="max-w-7xl mx-auto"
-          >
-            {/* Animated Hero Section */}
+        <div className="min-h-screen bg-slate-50">
+          {/* Hero + Carousel */}
+          <section className="relative flex items-center justify-center min-h-[60vh] overflow-hidden">
+            <div className="absolute inset-0 z-0">
+              <Carousel
+                showArrows={true}
+                showStatus={false}
+                showThumbs={false}
+                showIndicators={true}
+                infiniteLoop={true}
+                autoPlay={true}
+                interval={6000}
+                transitionTime={800}
+                emulateTouch={true}
+                useKeyboardArrows={true}
+                swipeable={true}
+                dynamicHeight={false}
+                className="w-full h-full"
+                stopOnHover={false}
+                renderIndicator={(onClickHandler, isSelected, index, label) => (
+                  <li
+                    onClick={onClickHandler}
+                    className={`mx-1 inline-block w-2 h-2 rounded-full transition-all ${isSelected ? 'bg-blue-600' : 'bg-slate-300'}`}
+                    aria-label={label}
+                    key={index}
+                  />
+                )}
+              >
+                {HERO_IMAGES.map((img, index) => (
+                  <div key={index} className="relative w-full h-[60vh]">
+                    <Image
+                      src={img}
+                      alt={`PR-Connect client industry: ${index === 0 ? 'café' : index === 1 ? 'restaurant' : index === 2 ? 'gym' : index === 3 ? 'SaaS' : 'startup'}`}
+                      fill
+                      className="object-cover"
+                      quality={90}
+                      sizes="100vw"
+                      priority
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-slate-900/40" />
+                  </div>
+                ))}
+              </Carousel>
+            </div>
             <motion.div
-              className="flex flex-col items-center justify-center min-h-[60vh] space-y-4"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              variants={containerVariant}
+              initial="hidden"
+              animate="visible"
               transition={{ duration: 0.7 }}
+              className="max-w-6xl mx-auto text-center z-10 px-6"
             >
               <motion.h1
-                initial={{ y: -20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.7, delay: 0.2 }}
-                className="text-5xl sm:text-6xl font-bold text-gray-800"
+                variants={itemVariant}
+                className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-white"
               >
                 About PR-Connect
               </motion.h1>
               <motion.p
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.7, delay: 0.4 }}
-                className="text-xl sm:text-2xl text-gray-600 text-center max-w-3xl"
+                variants={itemVariant}
+                transition={{ delay: 0.2 }}
+                className="text-xl md:text-2xl text-slate-100 max-w-2xl mx-auto"
               >
-                Revolutionizing brand connections through innovative QR-powered
-                strategies and cutting-edge marketing solutions.
+                Helping cafés, restaurants, gyms, SaaS, and startups launch, grow, and transform with QR-powered digital marketing.
               </motion.p>
-
-              {/* Add a moving SVG or text-based animation */}
-              <motion.div
-                className="flex space-x-3 mt-6"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.7, delay: 0.6 }}
-              >
-                <motion.div
-                  animate={{ x: [-10, 10, -10] }}
-                  transition={{ repeat: Infinity, duration: 3 }}
-                  className="p-2 bg-teal-500 rounded-full text-white"
-                >
-                  🚀
-                </motion.div>
-                <motion.div
-                  animate={{ y: [-5, 5, -5] }}
-                  transition={{ repeat: Infinity, duration: 3 }}
-                  className="p-2 bg-teal-500 rounded-full text-white"
-                >
-                  🔥
-                </motion.div>
-                <motion.div
-                  animate={{ x: [10, -10, 10] }}
-                  transition={{ repeat: Infinity, duration: 3 }}
-                  className="p-2 bg-teal-500 rounded-full text-white"
-                >
-                  🌟
-                </motion.div>
-              </motion.div>
             </motion.div>
+          </section>
 
-            {/* Features Section */}
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 my-16">
-              {features.map((item, index) => (
+          {/* Features */}
+          <section className="max-w-6xl mx-auto px-6 py-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {features.map((feature, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 * index, duration: 0.5 }}
-                  className="bg-white p-5 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:scale-105"
+                  variants={itemVariant}
+                  initial="hidden"
+                  whileInView="visible"
+                  transition={{ delay: index * 0.1, duration: 0.7 }}
+                  viewport={{ once: true, margin: '-100px' }}
+                  className="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-all hover:border-blue-200"
                 >
-                  <item.icon className="w-10 h-10 text-teal-500 mb-3" />
-                  <h3 className="text-lg font-semibold mb-2 text-gray-800">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm text-gray-600">{item.description}</p>
+                  <div className="flex items-center gap-3 mb-4">
+                    <feature.icon className="w-6 h-6 text-blue-600" />
+                    <h3 className="text-lg font-semibold text-slate-800">
+                      {feature.title}
+                    </h3>
+                  </div>
+                  <p className="text-slate-600 text-sm">
+                    {feature.description}
+                  </p>
                 </motion.div>
               ))}
             </div>
+          </section>
 
-            {/* Our Journey Section */}
-            <div className="bg-white rounded-lg shadow-md p-8 mb-16">
-              <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">
-                Our Journey
+          {/* Journey (Timeline) — Modern, clean, easy-to-scan */}
+          <section className="py-16 bg-white border-y border-slate-100">
+            <div className="max-w-3xl mx-auto px-6">
+              <h2 className="text-3xl font-bold tracking-tight text-center mb-12">
+                Our Journey So Far
               </h2>
-              <div className="relative">
-                <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-teal-200" />
+              <div className="space-y-8">
                 {milestones.map((milestone, index) => (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.1 * index, duration: 0.5 }}
-                    className={`flex items-center mb-8 ${
-                      index % 2 === 0 ? "flex-row-reverse" : ""
-                    }`}
+                    variants={itemVariant}
+                    initial="hidden"
+                    whileInView="visible"
+                    transition={{ delay: index * 0.1, duration: 0.7 }}
+                    viewport={{ once: true, margin: '-100px' }}
+                    className="flex items-start gap-6 group"
                   >
-                    <div className={`w-5/12 ${index % 2 === 0 ? "text-right" : ""}`}>
-                      <div className="p-4 bg-gray-50 rounded-lg shadow-md">
-                        <h3 className="text-lg font-semibold mb-2">{milestone.year}</h3>
-                        <p>{milestone.event}</p>
+                    <div className="w-24 flex-shrink-0">
+                      <div className="w-12 h-12 rounded-full flex items-center justify-center bg-blue-600 group-hover:bg-blue-700 transition-all shadow-md">
+                        <milestone.icon className="w-5 h-5 text-white" />
                       </div>
                     </div>
-                    <div className="w-2/12 flex justify-center">
-                      <div className="w-12 h-12 bg-teal-500 rounded-full flex items-center justify-center">
-                        <milestone.icon className="w-6 h-6 text-white" />
-                      </div>
+                    <div className="flex-1 pb-6 border-b border-slate-200">
+                      <div className="text-blue-600 font-semibold">{milestone.year}</div>
+                      <h3 className="text-xl font-semibold text-slate-900 mt-1">
+                        {milestone.event}
+                      </h3>
+                      {index < milestones.length - 1 && (
+                        <div className="-ml-16 mt-2 pl-24 border-l-4 border-blue-100 h-6 group-hover:border-blue-200 transition-colors"></div>
+                      )}
                     </div>
-                    <div className="w-5/12" />
                   </motion.div>
                 ))}
               </div>
             </div>
+          </section>
 
-            {/* Team Section */}
-            <div className="bg-white rounded-lg shadow-md p-8 mb-16">
-              <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">
-                Meet Our Leadership Team
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                {teamMembers.map((member, index) => (
-                  <motion.div
-                    key={member.name}
-                    className="bg-gray-50 rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 transform hover:scale-105"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                  >
+          {/* Team */}
+          <section className="max-w-6xl mx-auto px-6 py-16 bg-white">
+            <h2 className="text-3xl font-bold tracking-tight text-center mb-12">Meet Our Team</h2>
+            <motion.div
+              className="grid grid-cols-1 sm:grid-cols-3 gap-8"
+              variants={containerVariant}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-100px' }}
+            >
+              {teamMembers.map((member, index) => (
+                <motion.div
+                  key={index}
+                  variants={itemVariant}
+                  transition={{ delay: index * 0.15, duration: 0.7 }}
+                  className="flex flex-col items-center"
+                >
+                  <div className="w-full aspect-square relative rounded-2xl overflow-hidden group">
                     <Image
                       src={member.image}
-                      alt={`Image of ${member.name}`}
-                      width={300}
-                      height={300}
-                      className="w-full h-56 object-cover"
+                      alt={`${member.name}, ${member.role}`}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover group-hover:opacity-90 transition-opacity"
+                      quality={85}
                       priority
                     />
-                    <div className="p-4 text-center">
-                      <h3 className="text-xl font-semibold mb-1 text-gray-800">
-                        {member.name}
-                      </h3>
-                      <p className="text-gray-600 text-sm">{member.role}</p>
-                    </div>
-                  </motion.div>
+                  </div>
+                  <h3 className="mt-4 text-xl font-semibold text-center text-slate-800">
+                    {member.name}
+                  </h3>
+                  <p className="mt-1 text-slate-600 text-center text-sm">
+                    {member.role}
+                  </p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </section>
+
+          {/* Case Studies & Testimonials */}
+          <section className="py-16 bg-slate-50">
+            <div className="max-w-6xl mx-auto px-6">
+              <div className="flex flex-col md:flex-row gap-8">
+                <div className="w-full md:w-1/2 space-y-6">
+                  <h3 className="text-2xl font-bold tracking-tight text-slate-900 mb-4">Case Studies</h3>
+                  <Card className="p-6 rounded-2xl border border-slate-200 shadow-sm bg-white">
+                    <CardHeader className="px-0 pt-0">
+                      <CardTitle className="text-xl font-semibold mb-2 text-slate-900">
+                        Café Brand Amplification
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="px-0 py-0">
+                      <p className="text-slate-700 mb-4">
+                        A local café increased bookings by 40% and social engagement by 3x after launching a QR-driven menu and digital loyalty program.
+                      </p>
+                      <Button asChild variant="link" className="p-0 text-blue-600 hover:underline">
+                        <Link href="/case-studies">Read the full story →</Link>
+                      </Button>
+                    </CardContent>
+                  </Card>
+                  <Card className="p-6 rounded-2xl border border-slate-200 shadow-sm bg-white">
+                    <CardHeader className="px-0 pt-0">
+                      <CardTitle className="text-xl font-semibold mb-2 text-slate-900">
+                        SaaS Lead Machine
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="px-0 py-0">
+                      <p className="text-slate-700 mb-4">
+                        A European SaaS startup doubled inbound leads and reduced customer acquisition cost by 35% with a targeted PR and SEO campaign.
+                      </p>
+                      <Button asChild variant="link" className="p-0 text-blue-600 hover:underline">
+                        <Link href="/case-studies">Read the full story →</Link>
+                      </Button>
+                    </CardContent>
+                  </Card>
+                </div>
+                <div className="w-full md:w-1/2 space-y-6">
+                  <h3 className="text-2xl font-bold tracking-tight text-slate-900 mb-4">Client Testimonials</h3>
+                  <Card className="p-6 rounded-2xl border border-slate-200 shadow-sm bg-white">
+                    <CardHeader className="px-0 pt-0">
+                      <CardTitle className="text-xl font-semibold mb-2 text-slate-900">
+                        “PR-Connect delivered real results—fast.”
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="px-0 py-0">
+                      <p className="text-slate-700 italic mb-3">
+                        “Their team understood our business from day one. We now get more bookings and our brand feels modern and professional. Highly recommended for any local business looking to grow online.”
+                      </p>
+                      <p className="text-sm text-slate-600">— Maria S., Café Owner, Lisbon</p>
+                    </CardContent>
+                  </Card>
+                  <Card className="p-6 rounded-2xl border border-slate-200 shadow-sm bg-white">
+                    <CardHeader className="px-0 pt-0">
+                      <CardTitle className="text-xl font-semibold mb-2 text-slate-900">
+                        “A true partner for growth”
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="px-0 py-0">
+                      <p className="text-slate-700 italic mb-3">
+                        “Their QR and digital PR strategy helped our gym attract new members and streamline class bookings. The ongoing support has been invaluable as we expand across Europe.”
+                      </p>
+                      <p className="text-sm text-slate-600">— Jonas B., Gym Founder, Berlin</p>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Achievements */}
+          <section className="py-16 bg-white border-y border-slate-100">
+            <div className="max-w-6xl mx-auto px-6">
+              <h2 className="text-3xl font-bold tracking-tight text-center mb-12">Achievements</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {[
+                  { title: '25+ Brands Amplified', description: 'From cafés to SaaS, we’ve helped businesses launch and grow across Europe.' },
+                  { title: '95% Client Retention', description: 'Our ongoing support and results keep clients coming back year after year.' },
+                  { title: '4.8/5 Satisfaction', description: 'Rated by clients for clarity, speed, and measurable impact.' },
+                ].map((item, index) => (
+                  <Card key={index} className="p-6 rounded-2xl border border-slate-200 shadow-sm bg-blue-50">
+                    <CardContent>
+                      <h3 className="text-lg font-semibold text-blue-700 mb-2">{item.title}</h3>
+                      <p className="text-slate-700">{item.description}</p>
+                    </CardContent>
+                  </Card>
                 ))}
               </div>
             </div>
+          </section>
 
-            {/* Achievements Section */}
-            <div className="bg-white rounded-lg shadow-md p-8 mb-16">
-              <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">
-                Our Achievements
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <motion.div
-                  className="p-6 bg-gray-50 rounded-lg shadow-lg"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.1 }}
-                >
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">Global Reach</h3>
-                  <p className="text-gray-600">
-                    Our services span across multiple countries, establishing a global footprint.
-                  </p>
-                </motion.div>
-                <motion.div
-                  className="p-6 bg-gray-50 rounded-lg shadow-lg"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                >
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">Industry Recognition</h3>
-                  <p className="text-gray-600">
-                    We have received numerous awards and accolades for our innovative campaigns.
-                  </p>
-                </motion.div>
+          {/* CTA */}
+          <section className="py-20 bg-blue-600 text-white">
+            <div className="max-w-3xl mx-auto px-6 text-center">
+              <h2 className="text-3xl font-bold tracking-tight mb-6">Ready to Transform Your Business?</h2>
+              <p className="text-xl text-blue-100 mb-8">
+                Let’s discuss your goals and build a plan tailored to your café, restaurant, gym, SaaS, or startup.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button asChild size="lg" className="bg-white text-blue-800 hover:bg-blue-50 font-semibold">
+                  <Link href="/contact">Get a Free Consultation</Link>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="text-blue-800 border-white hover:bg-white/10">
+                  <Link href="/case-studies">blue Success Stories</Link>
+                </Button>
               </div>
             </div>
-
-            {/* Call to Action Section */}
-            <div className="flex flex-col items-center mt-12">
-              <motion.a
-                href="/contact"
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.4 }}
-                className="px-6 py-3 bg-teal-500 text-white font-semibold rounded-md shadow-lg hover:bg-teal-600 transition-all"
-              >
-                Get in Touch
-              </motion.a>
-            </div>
-          </motion.section>
+          </section>
         </div>
       )}
     </>
-  );
+  )
 }

@@ -4,9 +4,9 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
-import { SignedOut, SignInButton, SignedIn, UserButton } from '@clerk/nextjs'
 import { Button } from "@/components/ui/button"
 
+// Navigation items (no dashboard, no sign-in)
 const navItems = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About Us' },
@@ -14,89 +14,72 @@ const navItems = [
   { href: '/case-studies', label: 'Case Studies' },
   { href: '/resources', label: 'Resources' },
   { href: '/contact', label: 'Contact Us' },
-  { href: '/dashboard', label: 'Dashboard' },
+  // No 'Dashboard' here
 ]
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [mobileOpen, setIsOpen] = useState(false)
 
-  const toggleMenu = () => setIsOpen(!isOpen)
+  const toggleMenu = () => setIsOpen(!mobileOpen)
 
   return (
-    <header className="bg-background shadow-lg z-50 relative">
-      <nav className="container mx-auto px-4 py-4">
-        <div className="flex justify-between items-center">
-          <Link href="/" className="text-2xl font-bold text-primary">
-            PR-Connect
-          </Link>
+    <header className="sticky top-0 z-50 bg-background border-b border-border/60 shadow-sm">
+      <nav className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+        {/* Logo */}
+        <Link 
+          href="/" 
+          className="text-2xl font-bold tracking-tight text-primary hover:text-primary/90 transition-colors"
+          aria-label="PR-Connect — Websites & Branding for Local Businesses"
+        >
+          PR-Connect
+        </Link>
 
-          {/* Desktop Menu */}
-          <div className="hidden lg:flex space-x-6 items-center">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-foreground hover:text-primary transition duration-200"
-              >
-                {item.label}
-              </Link>
-            ))}
-            <div>
-              <SignedOut>
-                <SignInButton mode="modal">
-                  <Button variant="outline">Sign In</Button>
-                </SignInButton>
-              </SignedOut>
-              <SignedIn>
-                <UserButton afterSignOutUrl="/" />
-              </SignedIn>
-            </div>
-          </div>
-
-          {/* Mobile and Medium Screen Menu Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="lg:hidden"
-            onClick={toggleMenu}
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </Button>
+        {/* Tablet/Desktop Navigation */}
+        <div className="hidden lg:flex items-center gap-8">
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="text-muted-foreground hover:text-primary transition-colors text-[0.95rem] font-medium"
+            >
+              {item.label}
+            </Link>
+          ))}
         </div>
+
+        {/* Mobile Menu Toggle */}
+        <Button
+          variant="ghost"
+          size="icon"
+          className="lg:hidden"
+          onClick={toggleMenu}
+          aria-label="Toggle menu"
+        >
+          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </Button>
       </nav>
 
-      {/* Mobile and Medium Screen Menu */}
+      {/* Mobile Menu */}
       <AnimatePresence>
-        {isOpen && (
+        {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="lg:hidden absolute top-full left-0 right-0 bg-background shadow-md"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2, ease: 'easeInOut' }}
+            className="lg:hidden w-full overflow-hidden bg-background border-b border-border/60"
           >
-            <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
+            <div className="container px-4 pb-6 flex flex-col gap-4 pt-2">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="text-foreground hover:text-primary transition duration-300"
+                  className="text-[1rem] font-medium text-muted-foreground hover:text-primary py-2 transition-colors"
                   onClick={() => setIsOpen(false)}
                 >
                   {item.label}
                 </Link>
               ))}
-              <div className="pt-4 border-t border-border">
-                <SignedOut>
-                  <SignInButton mode="modal">
-                    <Button className="w-full">Sign In</Button>
-                  </SignInButton>
-                </SignedOut>
-                <SignedIn>
-                  <UserButton afterSignOutUrl="/" />
-                </SignedIn>
-              </div>
             </div>
           </motion.div>
         )}

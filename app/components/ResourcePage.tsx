@@ -119,7 +119,7 @@ export default function Resources() {
 
   return (
     <div className="min-h-screen bg-background">
-      <section className="py-20 bg-gradient-to-r from-teal-500 to-blue-500 text-white">
+      <section className="py-20 bg-gradient-to-r from-blue-500 to-blue-500 text-white">
         <div className="container mx-auto px-6 text-center">
           <h1 className="text-4xl font-bold mb-4">Resources</h1>
           <p className="text-xl mb-8">Insights and tips to elevate your marketing strategy</p>
