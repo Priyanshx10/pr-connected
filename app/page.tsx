@@ -3,191 +3,285 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
-import { ArrowRight, ChevronLeft, ChevronRight, Megaphone, Globe, BarChart, CheckCircle } from 'lucide-react'
+import { ArrowRight, Coffee, Utensils, Dumbbell, Cpu, Rocket, Zap, Layout, PenTool, Headphones, CheckCircle, Clock, Users, Globe } from 'lucide-react'
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
-const unsplashITImages = [
-  'https://images.unsplash.com/photo-1573167243872-43c6433b9d40?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-  'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-].map(url => `${url}&t=${Date.now()}`)
+// Unsplash API key — register at https://unsplash.com/developers
+const UNSPLASH_KEY = 'YOUR_UNSPLASH_API_KEY'
 
-const brandingServices = [
-  {
-    icon: Megaphone,
-    title: "Brand Amplification",
-    description: "360° brand visibility across digital and traditional channels",
-    features: [
-      "Social media dominance strategy",
-      "Influencer partnership programs", 
-      "Content syndication network"
-    ]
-  },
-  {
-    icon: Globe,
-    title: "Global Branding",
-    description: "Cultural adaptation for international markets",
-    features: [
-      "Market-specific messaging",
-      "Localization services",
-      "Cross-cultural PR"
-    ]
-  },
-  {
-    icon: BarChart,
-    title: "Performance Branding",
-    description: "Data-driven brand growth strategies",
-    features: [
-      "Brand lift measurement",
-      "Competitive benchmarking",
-      "ROI-focused campaigns"
-    ]
-  }
+// Industry configuration
+const INDUSTRIES = [
+  { name: 'Cafés', icon: Coffee, query: 'european+cafe' },
+  { name: 'Restaurants', icon: Utensils, query: 'european+restaurant' },
+  { name: 'Gyms', icon: Dumbbell, query: 'gym' },
+  { name: 'SaaS', icon: Cpu, query: 'startup+office' },
+  { name: 'Startups', icon: Rocket, query: 'startup+office' }
 ]
 
-export default function Home() {
-  const [currentImage, setCurrentImage] = useState(0)
+const SERVICES = [
+  { name: 'Website Design', icon: Layout, href: '/services/website', description: 'Fast, beautiful, mobile-first sites—designed for your business and your customers.' },
+  { name: 'Branding', icon: PenTool, href: '/services/branding', description: 'Logos, colors, fonts, and style guides—professional, memorable, ready for Europe.' },
+  { name: 'Ongoing Support', icon: Headphones, href: '/services/support', description: 'Hosting, updates, security, and real help—whenever you need it.' }
+]
 
+const TRUST_SIGNALS = [
+  { label: '50+ European Clients', icon: CheckCircle },
+  { label: 'Launch in 7–14 Days', icon: Clock },
+  { label: 'Multilingual & GDPR', icon: Globe },
+  { label: '24/7 Support', icon: Users }
+]
+
+// API fetch: Get an Unsplash image by query
+async function fetchUnsplashImage(query: string): Promise<string | null> {
+  try {
+    const res = await fetch(
+      `https://api.unsplash.com/photos/random?query=${query}&client_id=${UNSPLASH_KEY}`
+    )
+    if (!res.ok) throw new Error('Failed to fetch image')
+    const data = await res.json()
+    return data.urls.regular
+  } catch (error) {
+    console.error('Unsplash API error:', error)
+    return null
+  }
+}
+
+// Main component
+export default function Home() {
+  const [industryImages, setIndustryImages] = useState<Record<string, string>>({})
+
+  // Fetch Unsplash images for each industry on mount
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentImage(prev => (prev + 1) % unsplashITImages.length)
-    }, 8000)
-    return () => clearInterval(timer)
+    Promise.all(
+      INDUSTRIES.map(async (industry) => {
+        const url = await fetchUnsplashImage(industry.query)
+        return { [industry.name]: url }
+      })
+    ).then((results) => {
+      const images = results.reduce((acc, curr) => ({ ...acc, ...curr }), {})
+      setIndustryImages(images)
+    })
   }, [])
 
   return (
-    <div className="bg-white">
-      {/* Hero Section */}
-      <section className="relative h-[80vh] min-h-[600px] overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          {unsplashITImages.map((img, index) => (
-            <Image
-              key={index}
-              src={img}
-              alt={index === 0 ? "Brand amplification experts" : "Global marketing solutions"}
-              fill
-              priority={index < 2}
-              quality={index === currentImage ? 90 : 30}
-              className={`object-cover transition-opacity duration-1000 ${
-                index === currentImage ? 'opacity-100' : 'opacity-0'
-              }`}
-            />
-          ))}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
-        </div>
-
-        <div className="relative z-10 h-full flex flex-col justify-center items-center px-4 text-center">
-          <motion.h1
-            initial={{ y: -50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white [text-shadow:_0_2px_8px_rgba(0,0,0,0.5)]"
+    <div
+      className="bg-white"
+      style={{
+        // Modern, branded color scheme — modify to match your brand
+        '--color-primary': '#1e40af',
+        '--color-primary-light': '#3b82f6',
+        '--color-primary-dark': '#1e3a8a',
+        '--color-gray': '#374151',
+        '--color-gray-light': '#e5e7eb',
+      }}
+    >
+      {/* Hero: No header, direct to content */}
+      <section className="pt-24 pb-16 px-4 max-w-4xl mx-auto text-center md:pt-32 md:pb-24">
+        <h1
+          className="text-[2.5rem] md:text-[3.25rem] font-black leading-tight tracking-tight mb-6"
+          style={{
+            fontFamily: 'Inter, sans-serif',
+            fontWeight: 900,
+            letterSpacing: '-0.025em',
+            color: 'var(--color-primary)',
+            lineHeight: '1.1',
+          }}
+        >
+          Websites & Branding
+          <br />
+          <span
+            className="bg-clip-text text-transparent"
+            style={{
+              backgroundImage: 'linear-gradient(45deg, var(--color-primary-light), var(--color-primary-dark))',
+            }}
           >
-            <span className="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
-              Brand Dominance
-            </span><br />
-            Across Borders
-          </motion.h1>
-          
-          <motion.p
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-xl md:text-2xl mb-8 max-w-2xl text-blue-100"
-          >
-            We amplify brands globally through strategic positioning, cultural adaptation, and measurable impact
-          </motion.p>
-
-          <motion.div
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-4"
-          >
-            <Button asChild size="lg" className="bg-white text-blue-800 hover:bg-gray-100 shadow-lg">
-              <Link href="/contact">
-                Amplify Your Brand Now
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="text-blue-800 border-white hover:bg-white/20">
-              <Link href="/success-stories">
-                Brand Transformations
-              </Link>
-            </Button>
-          </motion.div>
-        </div>
-
-        <div className="absolute bottom-8 left-0 right-0 flex justify-center gap-6 text-sm text-white/80">
-          <span>50+ brands amplified</span>
-          <span>•</span>
-          <span>Avg. 1.2x brand lift</span>
-          <span>•</span>
-          <span>5+ markets covered</span>
+            Built for European Businesses
+          </span>
+        </h1>
+        <p
+          className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto"
+          style={{
+            color: 'var(--color-gray)',
+            fontWeight: 400,
+            lineHeight: '1.5',
+          }}
+        >
+          Get a fast, affordable, beautiful website and branding—tailored for cafés, restaurants, gyms, SaaS, and startups. Launch in days, not weeks.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <Button asChild size="lg" className="button-gradient">
+            <Link href="/get-started">Get My Website</Link>
+          </Button>
+          <Button asChild size="lg" variant="outline" className="button-outline">
+            <Link href="/case-studies">See Our Work</Link>
+          </Button>
         </div>
       </section>
 
-      {/* Branding Amplification Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4 text-gray-800">
-              <span className="text-blue-600">Brand Amplification</span> Framework
+      {/* Industry Showcase */}
+      <section className="py-16 bg-gray-50/50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2
+              className="text-3xl md:text-4xl font-bold mb-3"
+              style={{ color: 'var(--color-primary)' }}
+            >
+              Designed for Your Industry
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Our proven methodology for building dominant brands in competitive markets
+            <p
+              className="text-lg max-w-2xl mx-auto"
+              style={{ color: 'var(--color-gray)' }}
+            >
+              We know what works for your business—because we build it every day.
             </p>
           </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {brandingServices.map((service, index) => (
-              <Card key={index} className="group transition-all hover:shadow-xl hover:-translate-y-2 h-full">
-                <CardHeader>
-                  <div className="bg-blue-50 p-3 rounded-full w-fit mb-4">
-                    <service.icon className="w-8 h-8 text-blue-600" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
+            {INDUSTRIES.map((industry, i) => (
+              <Link
+                key={i}
+                href={`/industries/${industry.name.toLowerCase()}`}
+                className="group relative overflow-hidden rounded-xl border border-gray-200/80 hover:border-blue-200 transition-all shadow-sm hover:shadow-md"
+              >
+                {industryImages[industry.name] ? (
+                  <div className="aspect-square relative bg-gray-100">
+                    <Image
+                      src={industryImages[industry.name]}
+                      alt={`${industry.name} client site by PR-Connect`}
+                      fill
+                      className="object-cover group-hover:scale-[1.03] transition-transform duration-300"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
                   </div>
-                  <CardTitle className="text-2xl">{service.title}</CardTitle>
-                  <p className="text-gray-600">{service.description}</p>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3">
-                    {service.features.map((feature, i) => (
-                      <li key={i} className="flex items-start">
-                        <CheckCircle className="w-5 h-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
+                ) : (
+                  <div className="aspect-square flex items-center justify-center bg-gray-100">
+                    <industry.icon className="w-12 h-12 text-gray-400 opacity-70" />
+                  </div>
+                )}
+                <div className="p-5 text-center">
+                  <h3
+                    className="font-bold text-lg group-hover:text-blue-600 transition-colors"
+                    style={{ color: 'var(--color-primary)' }}
+                  >
+                    {industry.name}
+                  </h3>
+                </div>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Pricing CTA Section */}
-      <section className="bg-gradient-to-r from-blue-700 to-blue-900 py-20 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-6">
-            Ready for <span className="text-blue-300">Brand Transformation</span>?
+      {/* Services */}
+      <section className="py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-4 text-center mb-16">
+          <h2
+            className="text-3xl md:text-4xl font-bold mb-4"
+            style={{ color: 'var(--color-primary)' }}
+          >
+            Everything You Need to Succeed Online
           </h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Explore our flexible pricing options tailored to your brand's growth stage
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button asChild size="lg" className="bg-white text-blue-800 hover:bg-gray-100 shadow-lg">
-              <Link href="/pricing">
-                View Pricing Plans
+        </div>
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {SERVICES.map((service, i) => (
+              <Link
+                key={i}
+                href={service.href}
+                className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md border border-gray-200/70 hover:border-blue-200/70 transition-all group"
+              >
+                <div className="w-14 h-14 mx-auto mb-4 rounded-full flex items-center justify-center bg-blue-50 group-hover:bg-blue-100 transition-colors">
+                  <service.icon
+                    className="w-6 h-6 text-blue-600 group-hover:text-blue-700 transition-colors"
+                  />
+                </div>
+                <h3
+                  className="font-bold text-lg mb-3 text-center"
+                  style={{ color: 'var(--color-primary)' }}
+                >
+                  {service.name}
+                </h3>
+                <p
+                  className="text-center"
+                  style={{ color: 'var(--color-gray)' }}
+                >
+                  {service.description}
+                </p>
               </Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="text-blue-800 border-white hover:bg-white/20">
-              <Link href="/contact">
-                Get Custom Quote
-              </Link>
-            </Button>
+            ))}
           </div>
         </div>
       </section>
+
+      {/* Trust Signals */}
+      <section className="py-16 bg-gray-50/50">
+        <div className="max-w-4xl mx-auto px-4 text-center mb-8">
+          <h2
+            className="text-3xl font-bold mb-4"
+            style={{ color: 'var(--color-primary)' }}
+          >
+            Trusted by Local Businesses
+          </h2>
+        </div>
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 px-4">
+            {TRUST_SIGNALS.map((signal, i) => (
+              <div key={i} className="bg-white p-4 rounded-xl shadow-sm flex flex-col items-center">
+                <div className="w-8 h-8 rounded-full flex items-center justify-center mb-2 bg-blue-50">
+                  <signal.icon className="w-4 h-4 text-blue-600" />
+                </div>
+                <span
+                  className="font-medium text-center"
+                  style={{ color: 'var(--color-primary)' }}
+                >
+                  {signal.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-900 text-white">
+        <div className="max-w-2xl mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Get Noticed?</h2>
+          <p className="text-lg md:text-xl mb-8">
+            Launch your website and branding in days—built for cafés, restaurants, gyms, SaaS, and startups in Europe.
+          </p>
+          <Button asChild size="lg" className="button-gradient text-white">
+            <Link href="/get-started">Get Started</Link>
+          </Button>
+        </div>
+      </section>
+
+      {/* Global CSS — drop this in globals.css */}
+      <style jsx>{`
+        .button-gradient {
+          background: linear-gradient(
+            45deg,
+            var(--color-primary-light),
+            var(--color-primary-dark)
+          );
+          border: none;
+          color: white;
+          transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .button-gradient:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 6px 12px rgba(59, 130, 246, 0.15);
+        }
+        .button-outline {
+          color: var(--color-primary);
+          border-color: var(--color-primary);
+          transition: all 0.15s;
+        }
+        .button-outline:hover {
+          color: white;
+          background: var(--color-primary-light);
+          border-color: var(--color-primary-light);
+        }
+      `}</style>
     </div>
   )
 }
