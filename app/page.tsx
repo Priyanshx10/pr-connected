@@ -3,6 +3,7 @@ import HeroSection from './components/HeroSection'
 import Introduction from './components/Introduction'
 import ServiceSection from './components/ServiceSection'
 import WhyPR from './components/WhyPR'
+import PRDifferent from './components/PRDifferent'
 
 const page = () => {
   return (
@@ -11,6 +12,7 @@ const page = () => {
       <Introduction />
       <ServiceSection />
       <WhyPR />
+      <PRDifferent />
     </div>
   )
 }
