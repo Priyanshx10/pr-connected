@@ -7,17 +7,7 @@ import { Linkedin, Twitter, Mail } from 'lucide-react'
 import StatisticalLoader from './Loader'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import HeroSection from './HeroSection'
-import WhyPR from './WhyPR'
 import OurStoryPage from './OurStoryPage'
-
-
-const HERO_IMAGES = [
-  'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1920&q=80',
-  'https://images.unsplash.com/photo-1554469384-e58fac16e23a?auto=format&fit=crop&w=1920&q=80',
-  'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1920&q=80',
-  'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1920&q=80',
-  'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1920&q=80'
-]
 
 const teamMembers = [
   {
