@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 
-// Navigation items (no dashboard, no sign-in)
+// Navigation items
 const navItems = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About Us' },
@@ -14,7 +14,6 @@ const navItems = [
   { href: '/case-studies', label: 'Case Studies' },
   { href: '/resources', label: 'Resources' },
   { href: '/contact', label: 'Contact Us' },
-  // No 'Dashboard' here
 ]
 
 export default function Header() {
@@ -23,24 +22,24 @@ export default function Header() {
   const toggleMenu = () => setIsOpen(!mobileOpen)
 
   return (
-    <header className="sticky top-0 z-50 bg-background border-b border-border/60 shadow-sm">
+    <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/60 shadow-sm">
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
         {/* Logo */}
         <Link 
           href="/" 
-          className="text-2xl font-bold tracking-tight text-primary hover:text-primary/90 transition-colors"
-          aria-label="PR-Connect — Websites & Branding for Local Businesses"
+          className="text-2xl font-extrabold tracking-tight text-primary hover:text-primary/90 transition-colors"
+          aria-label="PR-Connect — Premium Web & AI Solutions for Forward-Thinking Brands"
         >
           PR-Connect
         </Link>
 
-        {/* Tablet/Desktop Navigation */}
-        <div className="hidden lg:flex items-center gap-8">
+        {/* Desktop Navigation */}
+        <div className="hidden lg:flex items-center gap-10">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="text-muted-foreground hover:text-primary transition-colors text-[0.95rem] font-medium"
+              className="text-[0.95rem] font-semibold text-muted-foreground hover:text-primary transition-colors"
             >
               {item.label}
             </Link>
@@ -53,9 +52,9 @@ export default function Header() {
           size="icon"
           className="lg:hidden"
           onClick={toggleMenu}
-          aria-label="Toggle menu"
+          aria-label="Toggle mobile menu"
         >
-          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </Button>
       </nav>
 
@@ -67,9 +66,9 @@ export default function Header() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2, ease: 'easeInOut' }}
-            className="lg:hidden w-full overflow-hidden bg-background border-b border-border/60"
+            className="lg:hidden w-full overflow-hidden bg-background border-t border-border/60"
           >
-            <div className="container px-4 pb-6 flex flex-col gap-4 pt-2">
+            <div className="container px-4 pb-6 pt-2 flex flex-col gap-4">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
