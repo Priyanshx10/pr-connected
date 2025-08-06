@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { CheckCircle2, ArrowRight, Bot, LayoutDashboard, Globe, QrCode, Brain, Smartphone } from 'lucide-react'
+import { CheckCircle2, ArrowRight, Bot, LayoutDashboard, Globe, QrCode, Brain } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'

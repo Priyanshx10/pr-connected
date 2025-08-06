@@ -2,10 +2,10 @@
 
 import { useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowRight, ArrowLeft, CheckCircle, BarChart, Users, Zap, Star, TrendingUp, Clock, Target } from 'lucide-react'
+import { ArrowRight, ArrowLeft, CheckCircle, Users, Zap, Star, TrendingUp, Clock, Target } from 'lucide-react'
 import Image from 'next/image'
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -30,7 +30,7 @@ const caseStudies = [
       { metric: "2.5x", label: "social media engagement" },
       { metric: "500%", label: "growth in loyalty sign-ups" }
     ],
-    testimonial: "PR-Connect's QR menus turned our regulars into ambassadors. The results exceeded our expectations.",
+    testimonial: "PR-Connect&apos;s QR menus turned our regulars into ambassadors. The results exceeded our expectations.",
     author: "Sarah Chen",
     role: "Marketing Director",
     challenge: "The café chain struggled with low customer retention, inconsistent social buzz, and no digital loyalty program.",
@@ -55,10 +55,10 @@ const caseStudies = [
       { metric: "50%", label: "faster demo bookings" },
       { metric: "75%", label: "higher webinar attendance" }
     ],
-    testimonial: "The QR + landing page combo made our product accessible in the real world. We're closing more deals than ever.",
+    testimonial: "The QR + landing page combo made our product accessible in the real world. We&apos;re closing more deals than ever.",
     author: "Marcus Rodriguez",
     role: "VP of Sales",
-    challenge: "The SaaS company's product was complex, and demo booking was a multi-step process that deterred prospects.",
+    challenge: "The SaaS company&apos;s product was complex, and demo booking was a multi-step process that deterred prospects.",
     solution: "We distributed branded QR codes at trade shows, conferences, and in direct mail, linking instantly to personalized demo sessions with pre-filled contact info.",
     implementation: [
       "Easy scan-to-demo landing pages with calendar integration",
@@ -80,10 +80,10 @@ const caseStudies = [
       { metric: "90%", label: "class occupancy" },
       { metric: "75%", label: "fewer no-shows" }
     ],
-    testimonial: "Our front desk used to be chaotic—now QR codes handle check-in, payments, and waitlists. It's a game-changer.",
+    testimonial: "Our front desk used to be chaotic—now QR codes handle check-in, payments, and waitlists. It&apos;s a game-changer.",
     author: "Emma Thompson",
     role: "Studio Manager",
-    challenge: "The gym's front desk was overloaded, online bookings were low, and no-shows depleted class revenue.",
+    challenge: "The gym&apos;s front desk was overloaded, online bookings were low, and no-shows depleted class revenue.",
     solution: "We launched QR-based class booking and waitlists, auto-send reminders and confirmation, and integrated Apple/Google Pay for instant payments.",
     implementation: [
       "QR kiosks at entry and in studios",
@@ -91,7 +91,7 @@ const caseStudies = [
       "Waitlist management with instant upgrades",
       "Contactless payment options"
     ],
-    impact: "Staff could focus on members, not paperwork. New members said signing up was 'effortless,' and no-shows became rare."
+    impact: "Staff could focus on members, not paperwork. New members said signing up was &apos;effortless,&apos; and no-shows became rare."
   }
 ]
 
@@ -145,7 +145,7 @@ export default function CaseStudies() {
               <span className="block text-blue-200">Drive Results</span>
             </h1>
             <p className="text-xl sm:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
-              See how we've transformed businesses across Europe with innovative digital solutions and measurable outcomes.
+              See how we&apos;ve transformed businesses across Europe with innovative digital solutions and measurable outcomes.
             </p>
             <div className="flex flex-wrap justify-center gap-4 text-sm">
               <Badge variant="secondary" className="bg-blue-500/20 text-blue-100 border-blue-400/30">
@@ -239,7 +239,7 @@ export default function CaseStudies() {
                             </div>
                           </div>
                           <blockquote className="text-lg text-gray-700 italic">
-                            "{caseStudies[currentStudy].testimonial}"
+                            &ldquo;{caseStudies[currentStudy].testimonial}&rdquo;
                           </blockquote>
                         </div>
                       </div>
@@ -485,7 +485,7 @@ export default function CaseStudies() {
               Ready to Create Your Success Story?
             </h2>
             <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              Let's transform your business with innovative digital solutions that drive real results.
+              Let&apos;s transform your business with innovative digital solutions that drive real results.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button

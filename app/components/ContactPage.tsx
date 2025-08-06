@@ -149,11 +149,11 @@ export default function ContactPage() {
             className="text-center max-w-4xl mx-auto"
           >
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Let's Start a
+              Let&apos;s Start a
               <span className="block text-blue-200">Conversation</span>
             </h1>
             <p className="text-xl sm:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
-              Ready to transform your business? Get in touch and let's discuss how we can help you achieve your digital goals.
+              Ready to transform your business? Get in touch and let&apos;s discuss how we can help you achieve your digital goals.
             </p>
             <div className="flex flex-wrap justify-center gap-4 text-sm">
               <Badge variant="secondary" className="bg-blue-500/20 text-blue-100 border-blue-400/30">
@@ -190,7 +190,7 @@ export default function ContactPage() {
                     Send us a Message
                   </CardTitle>
                   <p className="text-gray-600">
-                    Fill out the form below and we'll get back to you within 24 hours.
+                    Fill out the form below and we&apos;ll get back to you within 24 hours.
                   </p>
                 </CardHeader>
                 <CardContent>
@@ -348,7 +348,7 @@ export default function ContactPage() {
                             <span className="font-medium">Message sent successfully!</span>
                           </div>
                           <p className="text-green-700 text-sm mt-1">
-                            We'll get back to you within 24 hours.
+                            We&apos;ll get back to you within 24 hours.
                           </p>
                         </motion.div>
                       )}
@@ -455,7 +455,7 @@ export default function ContactPage() {
               Why Choose PR-Connect?
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We're committed to delivering exceptional results and providing outstanding support throughout your journey.
+              We&apos;re committed to delivering exceptional results and providing outstanding support throughout your journey.
             </p>
           </motion.div>
 
