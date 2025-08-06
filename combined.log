@@ -1,2 +1,14 @@
 {"email":"saw@gmail.com","level":"info","message":"New contact form submission","name":"Sam","service":"pr-connect"}
 {"error":{"code":"ENOTFOUND","hostname":"_mongodb._tcp.cluster0.maukh.mongodb.net","syscall":"querySrv"},"level":"error","message":"Error processing contact form","service":"pr-connect"}
+{"error":{"code":"ENOTFOUND","hostname":"_mongodb._tcp.cluster0.maukh.mongodb.net","syscall":"querySrv"},"level":"error","message":"Error processing contact form","service":"pr-connect"}
+{"error":"querySrv ENOTFOUND _mongodb._tcp.cluster0.maukh.mongodb.net","level":"error","message":"Error processing contact form","service":"pr-connect"}
+{"error":"querySrv ENOTFOUND _mongodb._tcp.cluster0.maukh.mongodb.net","level":"error","message":"Error processing contact form","service":"pr-connect"}
+{"error":"querySrv ENOTFOUND _mongodb._tcp.cluster0.maukh.mongodb.net","level":"error","message":"Error processing contact form","service":"pr-connect"}
+{"error":"querySrv ENOTFOUND _mongodb._tcp.cluster0.maukh.mongodb.net","level":"error","message":"Database connection failed, but continuing with fallback","service":"pr-connect","submissionData":{"company":"Alpha","email":"priyansh@gmail.com","name":"Priyansh"}}
+{"error":"bad auth : Authentication failed.","level":"error","message":"Database connection failed, but continuing with fallback","service":"pr-connect","submissionData":{"company":"afaewfe","email":"cascasca@gmail.com","name":"asccsd"}}
+{"company":"Lancesoft","email":"priyansh@gmail.com","level":"info","message":"New contact form submission saved to database","name":"Priyansh","service":"pr-connect","source":"contact-page","subject":"work"}
+{"company":"Pr-Connect","email":"hello@gmail.com","level":"info","message":"New contact form submission saved to database","name":"Priyansh Yadav","service":"pr-connect","source":"contact-page","subject":"All FIne"}
+{"company":"caedfeafe","email":"dscvesve@gmail.com","level":"info","message":"New contact form submission saved to database","name":"sacsdc","service":"pr-connect","source":"contact-page","subject":"cfedafef"}
+{"company":"Anshika","email":"anshika123@gmail.com","level":"info","message":"New contact form submission saved to database","name":"Anshika Trivedi","service":"pr-connect","source":"contact-page","subject":"Anshika"}
+{"company":"Pr_Connect","email":"anshika123@gmail.com","level":"info","message":"New contact form submission saved to database","name":"Anshika Trivedi","service":"pr-connect","source":"contact-page","subject":"Hello World GM"}
+{"company":"Lancesoft","email":"anshika123@gmail.com","level":"info","message":"New contact form submission saved to database","name":"Anshika trivedi","service":"pr-connect","source":"contact-page","subject":"Lancesoft"}

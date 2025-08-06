@@ -1,92 +1,78 @@
 'use client'
 
 import { useState } from 'react'
-import { CheckCircle2, ArrowRight, QrCode, BarChart2, Megaphone, Smartphone, Zap, Target } from 'lucide-react'
+import { CheckCircle2, ArrowRight, Bot, LayoutDashboard, Globe, QrCode, Brain } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
+import WhyPR from './WhyPR'
 
-// --- Real, business-focused value — no stock jargon, no fluff.
-// Replace placeholders with your actual client results.
 const services = [
   {
-    id: 'qr-code',
-    label: 'QR Code Integration',
+    id: 'ai-chatbots',
+    label: 'Custom AI Chatbots & Assistants',
+    icon: Bot,
+    description: 'Lead generation, support, or e-commerce bots built with Python, LLMs, and OpenAI APIs.',
+    features: [
+      'Multilingual capability (optional)',
+      'Custom workflows, logic, and tone',
+      'Integrates with websites or WhatsApp',
+      'Advanced: data retrieval, analytics, and memory'
+    ],
+    caseStudy: 'Clients across EU closed 3x more leads within 60 days'
+  },
+  {
+    id: 'landing-pages',
+    label: 'Conversion-Optimized Landing Pages',
+    icon: LayoutDashboard,
+    description: 'Optimized for product launches, real estate, coaching, and course sales.',
+    features: [
+      'High-converting sections (USP, social proof, CTA)',
+      'Mobile-first design with fast loading',
+      'Tracking: Meta Pixel, Google Analytics',
+      'Integrated with forms, calendars, or payments'
+    ],
+    caseStudy: 'Course creator saw 3.5x sign-ups after launch'
+  },
+  {
+    id: 'websites',
+    label: 'Premium Business Websites',
+    icon: Globe,
+    description: 'Branded, fully responsive websites with animation, testimonials, and care packages.',
+    features: [
+      'Custom design—no templates',
+      'Fast, SEO-friendly, and responsive',
+      'Branded visuals, video banners, testimonials',
+      'Maintenance add-on: £120–£200/month'
+    ],
+    caseStudy: 'Startup raised 6-figures after redesign'
+  },
+  {
+    id: 'qr-portals',
+    label: 'QR-Integrated Menus & Booking Portals',
     icon: QrCode,
-    description: 'Seamlessly integrate QR codes into your marketing for instant engagement and real-time updates.',
+    description: 'Interactive menus and portals for salons, cafes, and clinics with real-time updates.',
     features: [
-      'Custom QR design—matches your brand, not generic',
-      'Dynamic QR codes for instant content updates',
-      'Track scans, user behavior, and campaign impact',
-      'Works on menus, posters, packaging, and more'
+      'QR menus and appointment booking',
+      'WhatsApp/Email notifications',
+      'Admin dashboard with edits and insights',
+      'Integrated with Google Calendar or Sheets'
     ],
-    caseStudy: 'Retail client boosted engagement by 250% in 3 months'
+    caseStudy: 'Salon doubled bookings in 5 weeks'
   },
   {
-    id: 'analytics',
-    label: 'Analytics & Reporting',
-    icon: BarChart2,
-    description: 'Clear, actionable insights into every campaign—see what works, refine what doesn’t.',
+    id: 'internal-tools',
+    label: 'LLM-Powered Internal Tools',
+    icon: Brain,
+    description: 'Custom AI tools like lead analyzers, resume scorers, and LinkedIn assistants.',
     features: [
-      'Live dashboard: bookings, leads, sales, traffic',
-      'Monthly, weekly, or real-time reports',
-      'Export to PDF, Excel, or Google Sheets',
-      'Secure, GDPR-compliant data'
+      'AI scoring and ranking for leads/resumes',
+      'Bulk data processing using LLMs',
+      'Custom dashboards and filters',
+      'Connects with ATS, CRM, or email systems'
     ],
-    caseStudy: 'E-commerce brand increased ROI by 180% in 6 months'
-  },
-  {
-    id: 'digital-pr',
-    label: 'Digital PR Strategies',
-    icon: Megaphone,
-    description: 'Build your reputation, attract media, and amplify your message across the web.',
-    features: [
-      'Local and national press outreach',
-      'Crisis management (before you need it)',
-      'Google News, Apple News, and social syndication',
-      'Clear metrics: reach, engagement, sentiment'
-    ],
-    caseStudy: 'Tech startup grew positive mentions by 500% in 4 months'
-  },
-  {
-    id: 'mobile',
-    label: 'Mobile Campaigns',
-    icon: Smartphone,
-    description: 'Reach customers where they are—on phones, tablets, and apps.',
-    features: [
-      'One-click reservations, orders, or bookings',
-      'SMS/WhatsApp loyalty and promotions',
-      'App store optimization (ASO)',
-      'Geo-targeted offers and push notifications'
-    ],
-    caseStudy: 'Travel app tripled mobile conversions in 8 weeks'
-  },
-  {
-    id: 'brand',
-    label: 'Brand Amplification',
-    icon: Zap,
-    description: 'Make your café, gym, or startup the go-to destination in your city.',
-    features: [
-      'Logo, colors, fonts—unified across all channels',
-      'Customer stories, reviews, and testimonials',
-      'Instagram, TikTok, YouTube content plans',
-      'Partnerships with local influencers and businesses'
-    ],
-    caseStudy: 'Local café chain expanded reach by 400% in a year'
-  },
-  {
-    id: 'outreach',
-    label: 'Targeted Outreach',
-    icon: Target,
-    description: 'Connect with your ideal audience through precision-targeted outreach campaigns.',
-    features: [
-      'Local SEO, Google Maps, and directory listings',
-      'Email and SMS nurturing campaigns',
-      'Retargeting ads (Facebook, Instagram, Google)',
-      'A/B testing for headlines, images, offers'
-    ],
-    caseStudy: 'B2B SaaS doubled qualified leads in 12 weeks'
+    caseStudy: 'Recruiters processed 10x resumes using custom LLM tool'
   }
 ]
 
@@ -96,7 +82,6 @@ export default function Services() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-6 sm:py-10 px-4 sm:px-6">
       <div className="max-w-6xl mx-auto">
-        {/* Mobile/Tablet: Horizontal scrollable nav */}
         <nav className="flex md:hidden gap-3 mb-8 pb-2 -mx-4 px-4 overflow-x-auto scrolling-touch">
           {services.map((item, idx) => (
             <button
@@ -117,7 +102,6 @@ export default function Services() {
         </nav>
 
         <div className="flex flex-col md:flex-row gap-6 xl:gap-8 w-full">
-          {/* Desktop: Vertical, sticky nav */}
           <nav className="hidden md:flex flex-col gap-3 w-full md:w-60 lg:w-72 xl:w-80 sticky top-28 self-start min-h-0">
             {services.map((item, idx) => (
               <button
@@ -137,7 +121,6 @@ export default function Services() {
             ))}
           </nav>
 
-          {/* Main content */}
           <div className="flex-1">
             <AnimatePresence mode="wait">
               <motion.div
@@ -199,6 +182,8 @@ export default function Services() {
           </div>
         </div>
       </div>
+
+      <WhyPR />
     </div>
   )
 }

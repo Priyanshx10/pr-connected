@@ -2,20 +2,18 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { FaCoffee, FaUtensils, FaDumbbell, FaLaptopCode, FaRocket, FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram, FaEnvelope, FaPhoneAlt, FaArrowRight } from 'react-icons/fa'
+import { FaCoffee, FaUtensils, FaDumbbell, FaLaptopCode, FaRocket, FaLinkedinIn, FaEnvelope, FaPhoneAlt, FaArrowRight } from 'react-icons/fa'
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
 
   // Social Links — opens in new tab, semantic, accessible
   const socialLinks = [
-    { Icon: FaFacebookF, href: 'https://facebook.com/pr-connect', label: 'Connect on Facebook' },
-    { Icon: FaTwitter, href: 'https://x.com/pr-connect', label: 'Follow on X/Twitter' },
-    { Icon: FaLinkedinIn, href: 'https://linkedin.com/company/pr-connect', label: 'Network on LinkedIn' },
-    { Icon: FaInstagram, href: 'https://instagram.com/pr-connect', label: 'Follow on Instagram' },
-    { Icon: FaEnvelope, href: 'mailto:hello@pr-connect.com', label: 'Email us' },
-    { Icon: FaPhoneAlt, href: 'tel:+1234567890', label: 'Call us' }
+    { Icon: FaLinkedinIn, href: 'https://www.linkedin.com/company/prconnectx10/?viewAsMember=true', label: 'Network on LinkedIn' },
+    { Icon: FaEnvelope, href: 'mailto:Priyanshyadav1012@gmail.com', label: 'Email us' },
+    { Icon: FaPhoneAlt, href: 'tel:+917000566395', label: 'Whatsapp' }
   ]
 
   // Industry services — exactly matches pr-connect project scope
@@ -87,7 +85,7 @@ const Footer = () => {
                 PR-Connect
               </motion.span>
               <span className="ml-2 text-xs font-medium bg-blue-600 text-white px-2 py-1 rounded-full group-hover:bg-blue-500 transition-all">
-                Amplify Your Brand
+                <Image src="/images/logo.png" alt="PR-Connect" width={32} height={32} />
               </span>
             </Link>
             <p className="text-blue-100/90 max-w-[300px]">

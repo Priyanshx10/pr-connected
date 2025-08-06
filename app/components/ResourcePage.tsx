@@ -12,11 +12,11 @@ import { SetStateAction, useState } from 'react';
 const blogPosts = [
   {
     title: '12 SEO Best Practices to Improve Rankings in 2023',
-    excerpt: 'Learn essential strategies like mobile-first optimization and quality content creation to enhance your site’s visibility.',
+    excerpt: 'Learn essential strategies like mobile-first optimization and quality content creation to enhance your site\'s visibility.',
     date: '2023-09-10',
     author: 'Wadood Amir',
     category: 'SEO',
-    image: 'https://images.unsplash.com/photo-1713472728570-5a6ef3947de1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODR8fEFJfGVufDB8fDB8fHww',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&auto=format&fit=crop&q=80',
     description: 'This blog post covers the best practices for improving SEO rankings in 2023, including insights on mobile-first strategies, quality content creation, and the importance of user experience in search engine optimization.'
   },
   {
@@ -25,7 +25,7 @@ const blogPosts = [
     date: '2023-08-25',
     author: 'Neil Patel',
     category: 'SEO',
-    image: 'https://images.unsplash.com/photo-1713472728570-5a6ef3947de1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODR8fEFJfGVufDB8fDB8fHww',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&auto=format&fit=crop&q=80',
     description: 'This article explores effective techniques for targeting long-tail keywords, which can lead to higher search engine rankings and more qualified traffic. It provides practical tips for keyword research and content strategy.'
   },
   {
@@ -34,7 +34,7 @@ const blogPosts = [
     date: '2023-07-15',
     author: 'Ahrefs Team',
     category: 'SEO',
-    image: 'https://images.unsplash.com/photo-1713472728570-5a6ef3947de1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODR8fEFJfGVufDB8fDB8fHww',
+    image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500&auto=format&fit=crop&q=80',
     description: 'In this blog post, we discuss strategies for optimizing content for voice search, highlighting the importance of understanding user intent and using natural language in your content.'
   },
   {
@@ -43,7 +43,7 @@ const blogPosts = [
     date: '2023-06-30',
     author: 'Jane Doe',
     category: 'SEO',
-    image: 'https://images.unsplash.com/photo-1713472728570-5a6ef3947de1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODR8fEFJfGVufDB8fDB8fHww',
+    image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=500&auto=format&fit=crop&q=80',
     description: 'This article emphasizes the importance of mobile optimization in SEO, discussing how mobile-friendly websites can improve user experience and increase search rankings.'
   },
   {
@@ -52,17 +52,17 @@ const blogPosts = [
     date: '2023-05-20',
     author: 'Content Team',
     category: 'SEO',
-    image: 'https://images.unsplash.com/photo-1713472728570-5a6ef3947de1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODR8fEFJfGVufDB8fDB8fHww',
-    description: 'Learn how to create SEO-friendly content that captivates your audience while also improving your website’s visibility in search engine results.'
+    image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=500&auto=format&fit=crop&q=80',
+    description: 'Learn how to create SEO-friendly content that captivates your audience while also improving your website\'s visibility in search engine results.'
   },
   {
     title: 'Building Quality Backlinks in 2023',
-    excerpt: 'Learn effective strategies for acquiring high-quality backlinks to boost your website’s authority.',
+    excerpt: 'Learn effective strategies for acquiring high-quality backlinks to boost your website\'s authority.',
     date: '2023-04-15',
     author: 'Link Building Guru',
     category: 'SEO',
-    image: 'https://images.unsplash.com/photo-1713472728570-5a6ef3947de1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODR8fEFJfGVufDB8fDB8fHww',
-    description: 'This post outlines the importance of backlinks in SEO and provides actionable strategies for building high-quality backlinks to enhance your website’s authority.'
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&auto=format&fit=crop&q=80',
+    description: 'This post outlines the importance of backlinks in SEO and provides actionable strategies for building high-quality backlinks to enhance your website\'s authority.'
   },
   {
     title: 'Using Analytics to Drive Your SEO Strategy',
@@ -70,7 +70,7 @@ const blogPosts = [
     date: '2023-03-10',
     author: 'Data Analyst',
     category: 'SEO',
-    image: 'https://images.unsplash.com/photo-1713472728570-5a6ef3947de1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODR8fEFJfGVufDB8fDB8fHww',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&auto=format&fit=crop&q=80',
     description: 'Learn how to use analytics tools effectively to track your SEO performance and make data-driven decisions for your SEO strategy.'
   },
   {
@@ -79,7 +79,7 @@ const blogPosts = [
     date: '2023-02-05',
     author: 'Local SEO Expert',
     category: 'SEO',
-    image: 'https://images.unsplash.com/photo-1713472728570-5a6ef3947de1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODR8fEFJfGVufDB8fDB8fHww',
+    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&auto=format&fit=crop&q=80',
     description: 'This article offers valuable local SEO tips tailored for small businesses, highlighting tactics to improve visibility and attract local customers.'
   },
   {
@@ -88,7 +88,7 @@ const blogPosts = [
     date: '2023-01-25',
     author: 'Social Media Specialist',
     category: 'SEO',
-    image: 'https://images.unsplash.com/photo-1713472728570-5a6ef3947de1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODR8fEFJfGVufDB8fDB8fHww',
+    image: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=500&auto=format&fit=crop&q=80',
     description: 'Explore the connection between social media and SEO, and learn how effective social media strategies can enhance your organic search efforts.'
   },
   {
@@ -97,7 +97,7 @@ const blogPosts = [
     date: "2022-12-15",
     author: "SEO Specialist",
     category: "SEO",
-    image: 'https://images.unsplash.com/photo-1713472728570-5a6ef3947de1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODR8fEFJfGVufDB8fDB8fHww',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&auto=format&fit=crop&q=80',
     description: 'This blog post reviews the most effective keyword research tools, providing insights on how to use them to enhance your SEO strategy and improve content planning.'
   },
   // Add more blog posts as needed

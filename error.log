@@ -1,1 +1,7 @@
 {"error":{"code":"ENOTFOUND","hostname":"_mongodb._tcp.cluster0.maukh.mongodb.net","syscall":"querySrv"},"level":"error","message":"Error processing contact form","service":"pr-connect"}
+{"error":{"code":"ENOTFOUND","hostname":"_mongodb._tcp.cluster0.maukh.mongodb.net","syscall":"querySrv"},"level":"error","message":"Error processing contact form","service":"pr-connect"}
+{"error":"querySrv ENOTFOUND _mongodb._tcp.cluster0.maukh.mongodb.net","level":"error","message":"Error processing contact form","service":"pr-connect"}
+{"error":"querySrv ENOTFOUND _mongodb._tcp.cluster0.maukh.mongodb.net","level":"error","message":"Error processing contact form","service":"pr-connect"}
+{"error":"querySrv ENOTFOUND _mongodb._tcp.cluster0.maukh.mongodb.net","level":"error","message":"Error processing contact form","service":"pr-connect"}
+{"error":"querySrv ENOTFOUND _mongodb._tcp.cluster0.maukh.mongodb.net","level":"error","message":"Database connection failed, but continuing with fallback","service":"pr-connect","submissionData":{"company":"Alpha","email":"priyansh@gmail.com","name":"Priyansh"}}
+{"error":"bad auth : Authentication failed.","level":"error","message":"Database connection failed, but continuing with fallback","service":"pr-connect","submissionData":{"company":"afaewfe","email":"cascasca@gmail.com","name":"asccsd"}}
